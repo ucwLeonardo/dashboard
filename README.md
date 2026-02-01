@@ -48,8 +48,9 @@ This repository is configured with **GitHub Actions** to handle data updates aut
 **Serving the App via GitHub**:
 You can use **GitHub Pages** to serve the dashboard statically.
 1.  Go to **Settings** > **Pages**.
-2.  Select `main` branch (or configure a workflow to build to `gh-pages`).
-3.  *Note*: For static hosting, the frontend will read `data/stats.json` directly from the repository. Ensure the build configuration points to the correct data path.
+2.  Under **Build and deployment**, select **Source** -> **GitHub Actions**.
+3.  The `Deploy to GitHub Pages` workflow defined in this repo will automatically pick up and deploy.
+4.  *Note*: For static hosting, the frontend will read `data/stats.json` directly from the repository. The included workflow handles this copying.
 
 ## Development
 
