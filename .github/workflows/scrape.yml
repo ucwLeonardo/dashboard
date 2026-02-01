@@ -19,7 +19,7 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps chromium
       - name: Run Scraper
-        run: npx ts-node scraper/scrape.ts
+        run: npx tsx scraper/scrape.ts
       - name: Commit and Push changes
         run: |
           git config --global user.name 'github-actions[bot]'
