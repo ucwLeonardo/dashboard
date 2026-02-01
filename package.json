@@ -8,7 +8,8 @@
     "start:backend": "ts-node-esm server/index.ts",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest"
   },
   "dependencies": {
     "@playwright/test": "^1.58.1",
