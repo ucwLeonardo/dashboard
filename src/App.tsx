@@ -86,14 +86,18 @@ const App: React.FC = () => {
   };
 
   useEffect(() => {
-    fetch('/api/stats')
+    // In production (GitHub Pages), fetch the static JSON file.
+    // In development, use the API proxy.
+    const url = import.meta.env.PROD ? './data/stats.json' : '/api/stats';
+
+    fetch(url)
       .then(res => res.json())
       .then(data => {
         setStats(data);
         setLoading(false);
       })
       .catch(err => {
-        console.error(err);
+        console.error('Failed to load stats', err);
         setLoading(false);
       });
   }, []);
@@ -131,7 +135,7 @@ const App: React.FC = () => {
           <div className="card-wrapper">
             <a href="https://www.nvidia.com/en-us/training/self-paced-courses/" target="_blank" rel="noreferrer" className="card-link">
               <div className="section-card">
-                <h1>HQ</h1>
+                <h2>HQ</h2>
                 <div className="total-container">
                   <div className="total-count">{stats?.current.hq.total}</div>
                   {hqDiff.delta !== 0 && (
