@@ -1,50 +1,76 @@
-# React + TypeScript + Vite
+# NVIDIA DLI Course Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Tests](https://github.com/ucwLeonardo/dashboard/actions/workflows/test.yml/badge.svg)
 
-Currently, two official plugins are available:
+A monitoring dashboard for NVIDIA Deep Learning Institute (DLI) self-paced courses, comparing course availability and counts between the HQ (Global) and China regions.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- **Daily Automated Scraping**: Runs daily at 00:00 UTC (8:00 AM UTC+8) to fetch the latest course data.
+- **Data Diff Tracking**: Tracks changes in course counts and details (New/Removed courses).
+- **Dual Region View**: Side-by-side comparison of HQ and China course catalogs.
+- **Bilingual & Responsive**: English/Chinese labels matching region standards, with a responsive card-based layout.
+- **Theme Support**: Light (Default) and Dark modes.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Deployment
 
-- Configure the top-level `parserOptions` property like this:
+### 1. Ubuntu Server
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+A unified deployment script is provided for Ubuntu environments.
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+1.  **Clone the repository**:
+    ```bash
+    git clone https://github.com/ucwLeonardo/dashboard.git
+    cd dashboard
+    ```
+2.  **Run the deployment script**:
+    ```bash
+    chmod +x deploy.sh
+    ./deploy.sh
+    ```
+    This script will:
+    - Install Node.js dependencies.
+    - Build the frontend.
+    - Start the backend and frontend services using `pm2` (or `nohup` if pm2 is not available).
+    - Serve the application on port `5173`.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+### 2. GitHub Actions (Automated Data Updates)
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+This repository is configured with **GitHub Actions** to handle data updates automatically.
+
+- **Workflow**: `.github/workflows/scrape.yml`
+- **Schedule**: Runs daily at 8:00 AM Beijing Time.
+- **Behavior**:
+    - Scrapes NVIDIA DLI pages.
+    - Updates `data/stats.json`.
+    - Commits and pushes the updated data back to the `main` branch.
+    
+**Serving the App via GitHub**:
+You can use **GitHub Pages** to serve the dashboard statically.
+1.  Go to **Settings** > **Pages**.
+2.  Select `main` branch (or configure a workflow to build to `gh-pages`).
+3.  *Note*: For static hosting, the frontend will read `data/stats.json` directly from the repository. Ensure the build configuration points to the correct data path.
+
+## Development
+
+### Run Locally
+
+1.  **Install dependencies**:
+    ```bash
+    npm install
+    ```
+2.  **Start Development Server**:
+    ```bash
+    npm run dev
+    ```
+3.  **Run Scraper Manually**:
+    ```bash
+    npx tsx scraper/scrape.ts
+    ```
+
+## Testing
+
+Run unit and integration tests:
+```bash
+npm test
 ```
