@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths-ignore:
-      - 'data/**'
+      - 'data/stats.json'
   schedule:
     - cron: '0 0 * * *' # 8:00 AM UTC+8
   workflow_dispatch:

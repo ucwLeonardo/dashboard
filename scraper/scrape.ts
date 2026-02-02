@@ -16,11 +16,11 @@ interface SectionData {
     courses: Course[];
 }
 
-async function scrapeHQ() {
+async function scrapeHQ(url = 'https://www.nvidia.com/en-us/training/self-paced-courses/') {
     const browser = await chromium.launch({ headless: true });
     const page = await browser.newPage();
     try {
-        await page.goto('https://www.nvidia.com/en-us/training/self-paced-courses/', { waitUntil: 'networkidle', timeout: 30000 });
+        await page.goto(url, { waitUntil: 'networkidle', timeout: 30000 });
 
         // Wait for DLI widget content
         try {
@@ -124,11 +124,11 @@ async function scrapeHQ() {
     }
 }
 
-async function scrapeChina() {
+async function scrapeChina(url = 'https://www.nvidia.cn/training/online/') {
     const browser = await chromium.launch({ headless: true });
     const page = await browser.newPage();
     try {
-        await page.goto('https://www.nvidia.cn/training/online/', { waitUntil: 'domcontentloaded', timeout: 30000 });
+        await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
 
         // Wait for tabs
         try {
@@ -260,21 +260,64 @@ async function scrapeChina() {
 // Export for testing
 export { scrapeHQ, scrapeChina };
 
+const CONFIG_FILE = path.join(process.cwd(), 'data', 'event_config.json');
+
 async function main() {
     console.log('Starting scrape...');
     const startTime = Date.now();
 
+    // Load config
+    let eventConfig = { hqUrl: '', chinaUrl: '' };
+    if (fs.existsSync(CONFIG_FILE)) {
+        try {
+            eventConfig = JSON.parse(fs.readFileSync(CONFIG_FILE, 'utf-8'));
+        } catch (e) {
+            console.log('Error reading event config');
+        }
+    }
+
     const [hq, china] = await Promise.all([scrapeHQ(), scrapeChina()]);
 
+    // Scrape events if URLs are provided
+    let eventHQ: { sections: SectionData[], total: number } = { sections: [], total: 0 };
+    let eventChina: { sections: SectionData[], total: number } = { sections: [], total: 0 };
+
+    if (eventConfig.hqUrl) {
+        console.log(`Scraping HQ Event: ${eventConfig.hqUrl}`);
+        try {
+            eventHQ = await scrapeHQ(eventConfig.hqUrl);
+        } catch (e) {
+            console.error('Error scraping HQ Event:', e);
+        }
+    }
+
+    if (eventConfig.chinaUrl) {
+        console.log(`Scraping China Event: ${eventConfig.chinaUrl}`);
+        try {
+            eventChina = await scrapeChina(eventConfig.chinaUrl);
+        } catch (e) {
+            console.error('Error scraping China Event:', e);
+        }
+    }
+
     console.log(`Scrape completed in ${((Date.now() - startTime) / 1000).toFixed(1)}s`);
-    console.log(`HQ: ${hq.total} courses, China: ${china.total} courses`);
+    console.log(`HQ: ${hq.total}, China: ${china.total}, EventHQ: ${eventHQ.total}, EventChina: ${eventChina.total}`);
 
     // Load previous data
-    let previous = { hq: { sections: [], total: 0 }, china: { sections: [], total: 0 } };
+    let previous = {
+        hq: { sections: [], total: 0 },
+        china: { sections: [], total: 0 },
+        event: { hq: { sections: [], total: 0 }, china: { sections: [], total: 0 } }
+    };
+
     if (fs.existsSync(STATS_FILE)) {
         try {
             const existing = JSON.parse(fs.readFileSync(STATS_FILE, 'utf-8'));
             previous = existing.current || previous;
+            // Ensure structure compatibility if upgrading from old stats
+            if (!previous.event) {
+                previous.event = { hq: { sections: [], total: 0 }, china: { sections: [], total: 0 } };
+            }
         } catch (e) {
             console.log('Error reading existing stats');
         }
@@ -283,7 +326,14 @@ async function main() {
     // Save new data
     const data = {
         timestamp: new Date().toISOString(),
-        current: { hq, china },
+        current: {
+            hq,
+            china,
+            event: {
+                hq: eventHQ,
+                china: eventChina
+            }
+        },
         previous
     };
 

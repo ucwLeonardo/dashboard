@@ -12,6 +12,8 @@ const STATS_FILE = path.join(process.cwd(), 'data', 'stats.json');
 app.use(cors());
 app.use(express.json());
 
+const CONFIG_FILE = path.join(process.cwd(), 'data', 'event_config.json');
+
 app.get('/api/stats', (req, res) => {
     if (fs.existsSync(STATS_FILE)) {
         const data = fs.readFileSync(STATS_FILE, 'utf-8');
@@ -19,6 +21,22 @@ app.get('/api/stats', (req, res) => {
     } else {
         res.status(404).json({ error: 'Stats not found' });
     }
+});
+
+app.get('/api/config', (req, res) => {
+    if (fs.existsSync(CONFIG_FILE)) {
+        res.json(JSON.parse(fs.readFileSync(CONFIG_FILE, 'utf-8')));
+    } else {
+        res.json({ hqUrl: '', chinaUrl: '' });
+    }
+});
+
+app.post('/api/config', (req, res) => {
+    const { hqUrl, chinaUrl } = req.body;
+    fs.writeFileSync(CONFIG_FILE, JSON.stringify({ hqUrl, chinaUrl }, null, 2));
+    res.json({ success: true });
+    // Trigger scrape in background to update stats with new URLs
+    runScrape();
 });
 
 const runScrape = () => {

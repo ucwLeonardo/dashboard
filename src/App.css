@@ -312,3 +312,99 @@ body {
   font-size: 2rem;
   color: var(--accent-color);
 }
+
+/* Event Monitor Styles */
+.event-monitor {
+  margin-top: 60px;
+  padding: 40px;
+  border-top: 1px solid var(--border-color);
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.event-header {
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: var(--header-text);
+  text-align: center;
+}
+
+.config-section {
+  background-color: var(--card-bg);
+  padding: 30px;
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.input-group label {
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--label-color);
+}
+
+.input-group input {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-size: 1rem;
+}
+
+.save-btn {
+  background-color: var(--accent-color);
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.save-btn:hover {
+  filter: brightness(1.1);
+}
+
+.event-cards {
+  gap: 24px;
+}
+
+.event-cards .section-card {
+  padding: 24px;
+  min-height: auto;
+}
+
+.event-cards .total-count {
+  font-size: 3rem;
+}
+
+.event-cards .sub-sections {
+  margin-top: 20px;
+}
+
+.event-cards .label {
+  font-size: 1rem;
+}
+
+.event-cards .value {
+  font-size: 1.2rem;
+}
+
+.event-cards .card-wrapper {
+  min-width: 300px;
+}

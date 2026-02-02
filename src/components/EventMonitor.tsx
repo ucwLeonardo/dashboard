@@ -1,0 +1,155 @@
+import React, { useState, useEffect } from 'react';
+
+interface EventConfig {
+    hqUrl: string;
+    chinaUrl: string;
+}
+
+interface Course {
+    title: string;
+    url: string;
+    price: string;
+}
+
+interface Section {
+    title: string;
+    count: number;
+    courses: Course[];
+}
+
+interface RegionData {
+    sections: Section[];
+    total: number;
+}
+
+interface EventStats {
+    hq: RegionData;
+    china: RegionData;
+}
+
+interface EventMonitorProps {
+    eventStats?: EventStats;
+}
+
+const EventMonitor: React.FC<EventMonitorProps> = ({ eventStats }) => {
+    const [config, setConfig] = useState<EventConfig>({ hqUrl: '', chinaUrl: '' });
+    const [loadingConfig, setLoadingConfig] = useState(true);
+    const [isSaving, setIsSaving] = useState(false);
+
+    useEffect(() => {
+        // Fetch config
+        fetch('/api/config')
+            .then(res => res.json())
+            .then(data => {
+                setConfig(data);
+                setLoadingConfig(false);
+            })
+            .catch(err => {
+                console.error("Failed to load config", err);
+                setLoadingConfig(false);
+            });
+    }, []);
+
+    const handleSave = () => {
+        setIsSaving(true);
+        fetch('/api/config', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(config)
+        })
+            .then(res => res.json())
+            .then(() => {
+                setIsSaving(false);
+                alert('Config saved! Scraper triggered in background. Please refresh page in a minute.');
+            })
+            .catch(err => {
+                console.error("Failed to save config", err);
+                setIsSaving(false);
+                alert('Failed to save config');
+            });
+    };
+
+    if (loadingConfig) return <div>Loading Event Config...</div>;
+
+    const hasStats = eventStats && (eventStats.hq.total > 0 || eventStats.china.total > 0);
+
+    return (
+        <div className="event-monitor">
+            <h2 className="event-header">Event Page Monitoring</h2>
+
+            <div className="config-section">
+                <div className="input-group">
+                    <label>HQ Event URL:</label>
+                    <input
+                        type="text"
+                        value={config.hqUrl}
+                        onChange={e => setConfig({ ...config, hqUrl: e.target.value })}
+                        placeholder="https://www.nvidia.com/..."
+                    />
+                </div>
+                <div className="input-group">
+                    <label>China Event URL:</label>
+                    <input
+                        type="text"
+                        value={config.chinaUrl}
+                        onChange={e => setConfig({ ...config, chinaUrl: e.target.value })}
+                        placeholder="https://www.nvidia.cn/..."
+                    />
+                </div>
+                <button onClick={handleSave} disabled={isSaving} className="save-btn">
+                    {isSaving ? 'Saving...' : 'Save & Scrape'}
+                </button>
+            </div>
+
+            {hasStats && (
+                <div className="cards-container event-cards">
+                    {/* HQ Event Card */}
+                    {eventStats.hq.total > 0 && (
+                        <div className="card-wrapper">
+                            <a href={config.hqUrl} target="_blank" rel="noreferrer" className="card-link">
+                                <div className="section-card">
+                                    <h3>HQ Event</h3>
+                                    <div className="total-container">
+                                        <div className="total-count">{eventStats.hq.total}</div>
+                                    </div>
+                                    <div className="sub-sections">
+                                        {eventStats.hq.sections.map((s, i) => (
+                                            <div key={i} className="stat-item">
+                                                <span className="label" title={s.title}>{s.title}</span>
+                                                <span className="value">{s.count}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    )}
+
+                    {/* China Event Card */}
+                    {eventStats.china.total > 0 && (
+                        <div className="card-wrapper">
+                            <a href={config.chinaUrl} target="_blank" rel="noreferrer" className="card-link">
+                                <div className="section-card">
+                                    <h3>China Event</h3>
+                                    <div className="total-container">
+                                        <div className="total-count">{eventStats.china.total}</div>
+                                    </div>
+                                    <div className="sub-sections">
+                                        {eventStats.china.sections.map((s, i) => (
+                                            <div key={i} className="stat-item">
+                                                <span className="label text-chinese" title={s.title}>{s.title}</span>
+                                                <span className="value">{s.count}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    )}
+                </div>
+            )}
+        </div>
+    );
+};
+
+export default EventMonitor;
