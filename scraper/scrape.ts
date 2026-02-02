@@ -37,7 +37,7 @@ async function scrapeHQ() {
         }
 
         const tabs = await page.$$('.cmp-tabs__tab');
-        console.log(`HQ found ${tabs.length} tabs`);
+        // console.log(`HQ found ${tabs.length} tabs`);
 
         // Iterate through tabs to ensure all content is loaded
         for (const tab of tabs) {
@@ -112,6 +112,7 @@ async function scrapeHQ() {
                 courses.push({ title: titleText, url, price });
             }
 
+            console.log(`Found ${courses.length} courses in ${title}`);
             if (courses.length > 0) {
                 sections.push({ title, count: courses.length, courses });
             }
@@ -143,13 +144,13 @@ async function scrapeChina() {
         const tabs = await page.$$('li[data-tab]');
         const sections: SectionData[] = [];
 
-        console.log(`China found ${tabs.length} tabs`);
+        // console.log(`China found ${tabs.length} tabs`);
 
         for (const tab of tabs) {
             const title = (await tab.textContent())?.trim() || 'Unknown';
             const contentId = await tab.getAttribute('data-tab');
 
-            console.log(`Processing China tab: ${title}`);
+            // console.log(`Processing China tab: ${title}`);
 
             if (title.includes('基础架构') || title === 'Unknown' || !contentId) continue;
 
@@ -244,7 +245,7 @@ async function scrapeChina() {
                 }
             }
 
-            console.log(`  Found ${courses.length} courses in ${title}`);
+            console.log(`Found ${courses.length} courses in ${title}`);
             if (courses.length > 0) {
                 sections.push({ title, count: courses.length, courses });
             }
