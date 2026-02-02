@@ -41,3 +41,6 @@ The monitoring system is designed to track and compare NVIDIA Deep Learning Inst
     *   When the Event URLs are updated and saved via the Dashboard (running locally or with backend), a scrape is triggered immediately.
     *   On code commits (push to main), the scraping workflow is also triggered to ensure data is fresh.
     *   The scraped data (`stats.json`) is committed back to the repository to serve as the static data source for the frontend.
+
+## Development Guidelines
+*   **Git Workflow**: Always pull the repository (`git pull --rebase origin main`) before pushing code changes to avoid conflicts and rejected pushes.
