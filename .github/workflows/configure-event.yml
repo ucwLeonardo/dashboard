@@ -1,0 +1,56 @@
+name: Configure Event Monitor
+
+on:
+  workflow_dispatch:
+    inputs:
+      active:
+        description: 'Enable Event Monitoring'
+        type: boolean
+        required: true
+        default: true
+      hq_url:
+        description: 'HQ Event URL'
+        type: string
+        required: false
+      china_url:
+        description: 'China Event URL'
+        type: string
+        required: false
+
+permissions:
+  contents: write
+
+jobs:
+  update-event-config:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Update Configuration
+        run: |
+          if [ "${{ inputs.active }}" = "true" ]; then
+            echo '{
+              "hqUrl": "${{ inputs.hq_url }}",
+              "chinaUrl": "${{ inputs.china_url }}"
+            }' > data/event_config.json
+            echo "Event monitoring ENABLED."
+          else
+            echo '{
+              "hqUrl": "",
+              "chinaUrl": ""
+            }' > data/event_config.json
+            echo "Event monitoring DISABLED."
+          fi
+
+      - name: Commit and Push
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add data/event_config.json
+          
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore: update event config (Active: ${{ inputs.active }})"
+            git push
+          fi
