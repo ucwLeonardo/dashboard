@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-02-01T14:41:17.906Z",
+  "timestamp": "2026-02-02T01:57:31.666Z",
   "current": {
     "hq": {
       "sections": [
@@ -1035,7 +1035,7 @@
         },
         {
           "title": "Generative AI/LLM",
-          "count": 12,
+          "count": 22,
           "courses": [
             {
               "title": "Generative AI Explained",
@@ -1096,12 +1096,62 @@
               "title": "Rapid Application Development with Large Language Models (LLMs)",
               "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-FX-26+V1",
               "price": "$90"
+            },
+            {
+              "title": "Introduction to Multi-Modal Data Curation",
+              "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-FX-27+V1",
+              "price": "Free"
+            },
+            {
+              "title": "An Introduction to NVIDIA Cosmos for Physical AI",
+              "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-OV-42+V1",
+              "price": "$30"
+            },
+            {
+              "title": "Getting Started with NVIDIA Tools for Generative AI in Digital Health",
+              "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-HX-03+V1",
+              "price": "Free"
+            },
+            {
+              "title": "Streamlining Drug Discovery with NVIDIA BioNeMo NIM Microservices and Blueprints",
+              "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-HX-04+V1",
+              "price": "Free"
+            },
+            {
+              "title": "Evaluating RAG and Semantic Search Systems",
+              "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-FX-32+V1",
+              "price": "$30"
+            },
+            {
+              "title": "Domain-Adaptive Pre-Training: Tailoring LLMs for Specialized Applications",
+              "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-FX-33+V1",
+              "price": "$30"
+            },
+            {
+              "title": "Agentic AI Explained",
+              "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-FX-39+V1",
+              "price": "Free"
+            },
+            {
+              "title": "Build a Deep Research Agent",
+              "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-FX-40+V1",
+              "price": "Free"
+            },
+            {
+              "title": "The Art of Compressing LLMs: Pruning, Distillation, and Quantization Demystified",
+              "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-FX-24+V1",
+              "price": "$90"
+            },
+            {
+              "title": "Building Agentic AI Applications with LLMs",
+              "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-FX-41+V1",
+              "price": "$90"
             }
           ]
         },
         {
           "title": "Graphics and Simulation",
-          "count": 12,
+          "count": 17,
           "courses": [
             {
               "title": "Develop, Customize, and Publish in Omniverse With Extensions",
@@ -1162,11 +1212,36 @@
               "title": "Develop, Simulate, and Deploy Robot Intelligence With General Robotics",
               "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-OV-38+V1",
               "price": "Free"
+            },
+            {
+              "title": "Software-in-the-Loop Testing for Robots With OpenUSD, Isaac Sim, and ROS",
+              "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-OV-39+V1",
+              "price": "Free"
+            },
+            {
+              "title": "Accelerating ROS 2 Workloads With NVIDIA GPU-Powered Libraries and AI Models",
+              "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-OV-41+V1",
+              "price": "$30"
+            },
+            {
+              "title": "Building and Deploying Digital Twin Applications With Omniverse Kit App Streaming",
+              "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-OV-43+V1",
+              "price": "$30"
+            },
+            {
+              "title": "Accelerating Computer-Aided Engineering (CAE) with NVIDIA AI Physics Technology",
+              "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-OV-48+V1",
+              "price": "$90"
+            },
+            {
+              "title": "Building AI-Powered Material Generation for Omniverse With DGX Cloud",
+              "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-OV-53+V1",
+              "price": "Free"
             }
           ]
         }
       ],
-      "total": 57
+      "total": 72
     },
     "china": {
       "sections": [
