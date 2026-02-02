@@ -260,6 +260,113 @@ async function scrapeChina(url = 'https://www.nvidia.cn/training/online/') {
 // Export for testing
 export { scrapeHQ, scrapeChina };
 
+// GTC Event Page Scraping Functions
+async function scrapeGTCEvent(url: string, isChina: boolean = false) {
+    const browser = await chromium.launch({ headless: true });
+    const page = await browser.newPage();
+
+    try {
+        await page.goto(url, { waitUntil: 'networkidle', timeout: 30000 });
+
+        // Wait for content to load
+        await page.waitForTimeout(3000);
+
+        const sections: SectionData[] = [];
+
+        // Extract Full-Day Workshops
+        const workshopSection: SectionData = {
+            title: isChina ? '全天实战培训' : 'Full-Day Workshops',
+            count: 0,
+            courses: []
+        };
+
+        // Find all H3 headers (workshop titles) in the Full-Day Workshops section
+        const workshopHeaders = await page.$$('h3');
+        for (const header of workshopHeaders) {
+            const title = (await header.textContent())?.trim();
+            if (!title) continue;
+
+            // Skip section headers
+            if (title.includes('Full-Day') || title.includes('全天') ||
+                title.includes('Two-Hour') || title.includes('迷你') ||
+                title.includes('Get Certified') || title.includes('认证')) {
+                continue;
+            }
+
+            // Find the "View Details" or "Learn More" link after this header
+            const url = await header.evaluate((el) => {
+                const parent = el.parentElement;
+                if (!parent) return '';
+                const link = parent.querySelector('a[href*="session-catalog"]');
+                return link?.getAttribute('href') || '';
+            });
+
+            if (url) {
+                workshopSection.courses.push({
+                    title,
+                    url: url.startsWith('http') ? url : `https://www.nvidia.com${url}`,
+                    price: isChina ? '付费' : 'Paid'
+                });
+            }
+        }
+
+        workshopSection.count = workshopSection.courses.length;
+        if (workshopSection.count > 0) {
+            sections.push(workshopSection);
+        }
+
+        // Extract Training Labs (H2 headers in the Two-Hour section)
+        const labSection: SectionData = {
+            title: isChina ? '迷你实战课程' : 'Training Labs',
+            count: 0,
+            courses: []
+        };
+
+        const labHeaders = await page.$$('h2');
+        for (const header of labHeaders) {
+            const title = (await header.textContent())?.trim();
+            if (!title) continue;
+
+            // Skip section headers and other non-lab titles
+            if (title.includes('Two-Hour') || title.includes('迷你') ||
+                title.includes('Group Pricing') || title.includes('团体') ||
+                title.includes('Get Certified') || title.includes('认证') ||
+                title.includes('Full-Day') || title.includes('全天')) {
+                continue;
+            }
+
+            // Find the "Learn More" link after this header
+            const url = await header.evaluate((el) => {
+                const parent = el.parentElement;
+                if (!parent) return '';
+                const link = parent.querySelector('a[href*="session-catalog"]');
+                return link?.getAttribute('href') || '';
+            });
+
+            if (url) {
+                labSection.courses.push({
+                    title,
+                    url: url.startsWith('http') ? url : `https://www.nvidia.com${url}`,
+                    price: isChina ? '包含在培训通行证中' : 'Included with Training Lab Pass'
+                });
+            }
+        }
+
+        labSection.count = labSection.courses.length;
+        if (labSection.count > 0) {
+            sections.push(labSection);
+        }
+
+        const total = sections.reduce((sum, s) => sum + s.count, 0);
+        console.log(`Found ${total} GTC sessions (${workshopSection.count} workshops, ${labSection.count} labs)`);
+
+        return { sections, total };
+
+    } finally {
+        await browser.close();
+    }
+}
+
 const CONFIG_FILE = path.join(process.cwd(), 'data', 'event_config.json');
 
 async function main() {
@@ -285,7 +392,7 @@ async function main() {
     if (eventConfig.hqUrl) {
         console.log(`Scraping HQ Event: ${eventConfig.hqUrl}`);
         try {
-            eventHQ = await scrapeHQ(eventConfig.hqUrl);
+            eventHQ = await scrapeGTCEvent(eventConfig.hqUrl, false);
         } catch (e) {
             console.error('Error scraping HQ Event:', e);
         }
@@ -294,7 +401,7 @@ async function main() {
     if (eventConfig.chinaUrl) {
         console.log(`Scraping China Event: ${eventConfig.chinaUrl}`);
         try {
-            eventChina = await scrapeChina(eventConfig.chinaUrl);
+            eventChina = await scrapeGTCEvent(eventConfig.chinaUrl, true);
         } catch (e) {
             console.error('Error scraping China Event:', e);
         }

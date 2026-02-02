@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-02-02T04:31:20.503Z",
+  "timestamp": "2026-02-02T05:21:10.429Z",
   "current": {
     "hq": {
       "sections": [
@@ -848,8 +848,86 @@
     },
     "event": {
       "hq": {
-        "sections": [],
-        "total": 0
+        "sections": [
+          {
+            "title": "Full-Day Workshops",
+            "count": 9,
+            "courses": [
+              {
+                "title": "Accelerated Networking for AI Infrastructure",
+                "url": "https://www.nvidia.com/gtc/session-catalog/sessions/gtc26-dliw82209/",
+                "price": "Paid"
+              },
+              {
+                "title": "Adding New Knowledge to Large Language Models (LLMs)",
+                "url": "https://www.nvidia.com/gtc/session-catalog/sessions/gtc26-dliw82267/",
+                "price": "Paid"
+              },
+              {
+                "title": "Building AI Agents With Multimodal Models",
+                "url": "https://www.nvidia.com/gtc/session-catalog/sessions/gtc26-dliw82269/",
+                "price": "Paid"
+              },
+              {
+                "title": "Building LLM Applications With Prompt Engineering",
+                "url": "https://www.nvidia.com/gtc/session-catalog/sessions/gtc26-dliw82270/",
+                "price": "Paid"
+              },
+              {
+                "title": "Building Observable and Scalable Multi-Agent Workflows for Asset Lifecycle Management",
+                "url": "https://www.nvidia.com/gtc/session-catalog/sessions/gtc26-dliw82268/",
+                "price": "Paid"
+              },
+              {
+                "title": "Deploying and Optimizing AI Inference at Scale",
+                "url": "https://www.nvidia.com/gtc/session-catalog/sessions/gtc26-dliw82274/",
+                "price": "Paid"
+              },
+              {
+                "title": "OpenUSD Crash Course: Build 3D Data Pipelines for Physical AI",
+                "url": "https://www.nvidia.com/gtc/session-catalog/sessions/gtc26-dliw82272/",
+                "price": "Paid"
+              },
+              {
+                "title": "How to Simulate, Train, Validate, and Deploy an End-to-End Robotics Workflow With NVIDIA Isaac",
+                "url": "https://www.nvidia.com/gtc/session-catalog/sessions/gtc26-dliw82273/",
+                "price": "Paid"
+              },
+              {
+                "title": "Fundamentals of GPU-Accelerated Workflows With CUDA Python",
+                "url": "https://www.nvidia.com/gtc/session-catalog/sessions/gtc26-dliw82265/",
+                "price": "Paid"
+              }
+            ]
+          },
+          {
+            "title": "Training Labs",
+            "count": 4,
+            "courses": [
+              {
+                "title": "Accelerating Robot Learning With Isaac Lab and Newton",
+                "url": "https://www.nvidia.com/gtc/session-catalog/sessions/gtc26-dlit81700/?regcode=no-ncid&ncid=no-ncid",
+                "price": "Included with Training Lab Pass"
+              },
+              {
+                "title": "Building Agentic Workflows for Financial Applications",
+                "url": "https://www.nvidia.com/gtc/session-catalog/sessions/gtc26-dlit81814/?regcode=no-ncid&ncid=no-ncid",
+                "price": "Included with Training Lab Pass"
+              },
+              {
+                "title": "The Kaggle Grandmasters Playbook: Battle-Tested Modeling Techniques for Tabular Data",
+                "url": "https://www.nvidia.com/gtc/session-catalog/sessions/gtc26-dlit81565/?regcode=no-ncid&ncid=no-ncid",
+                "price": "Included with Training Lab Pass"
+              },
+              {
+                "title": "Using Reasoning VLAs to Develop Safer Autonomous Vehicles",
+                "url": "https://www.nvidia.com/gtc/session-catalog/sessions/gtc26-dlit81597/?regcode=no-ncid&ncid=no-ncid",
+                "price": "Included with Training Lab Pass"
+              }
+            ]
+          }
+        ],
+        "total": 13
       },
       "china": {
         "sections": [],
