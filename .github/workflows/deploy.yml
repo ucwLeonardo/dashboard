@@ -43,6 +43,7 @@ jobs:
         run: |
           mkdir -p dist/data
           cp data/stats.json dist/data/stats.json
+          if [ -f data/event_config.json ]; then cp data/event_config.json dist/data/event_config.json; fi
           
       - name: Setup Pages
         uses: actions/configure-pages@v5

@@ -45,9 +45,12 @@ const EventMonitor: React.FC<EventMonitorProps> = ({ eventStats }) => {
         }
 
         // Always try to fetch from API to get the "Truth" from server/repo
-        fetch('/api/config')
+        // In PROD (GitHub Pages), fetch the static JSON file copied by deploy workflow
+        const url = import.meta.env.PROD ? './data/event_config.json' : '/api/config';
+
+        fetch(url)
             .then(res => {
-                if (!res.ok) throw new Error('No backend API');
+                if (!res.ok) throw new Error('No backend API or Config File');
                 return res.json();
             })
             .then(data => {
