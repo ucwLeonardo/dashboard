@@ -73,11 +73,18 @@ const EventMonitor: React.FC<EventMonitorProps> = ({ eventStats }) => {
 
     const hasStats = eventStats && (eventStats.hq.total > 0 || eventStats.china.total > 0);
 
+    const isProd = import.meta.env.PROD;
+
     return (
         <div className="event-monitor">
             <h2 className="event-header">Event Page Monitoring</h2>
 
             <div className="config-section">
+                {isProd && (
+                    <div className="info-banner" style={{ marginBottom: '15px', color: 'var(--label-color)', fontSize: '0.9rem' }}>
+                        Note: In production (GitHub Pages), configuration must be updated via <code>data/event_config.json</code> in the repository.
+                    </div>
+                )}
                 <div className="input-group">
                     <label>HQ Event URL:</label>
                     <input
@@ -85,6 +92,7 @@ const EventMonitor: React.FC<EventMonitorProps> = ({ eventStats }) => {
                         value={config.hqUrl}
                         onChange={e => setConfig({ ...config, hqUrl: e.target.value })}
                         placeholder="https://www.nvidia.com/..."
+                        disabled={isProd}
                     />
                 </div>
                 <div className="input-group">
@@ -94,11 +102,14 @@ const EventMonitor: React.FC<EventMonitorProps> = ({ eventStats }) => {
                         value={config.chinaUrl}
                         onChange={e => setConfig({ ...config, chinaUrl: e.target.value })}
                         placeholder="https://www.nvidia.cn/..."
+                        disabled={isProd}
                     />
                 </div>
-                <button onClick={handleSave} disabled={isSaving} className="save-btn">
-                    {isSaving ? 'Saving...' : 'Save & Scrape'}
-                </button>
+                {!isProd && (
+                    <button onClick={handleSave} disabled={isSaving} className="save-btn">
+                        {isSaving ? 'Saving...' : 'Save & Scrape'}
+                    </button>
+                )}
             </div>
 
             {hasStats && (
