@@ -36,18 +36,22 @@ const EventMonitor: React.FC<EventMonitorProps> = ({ eventStats }) => {
     const [loadingConfig, setLoadingConfig] = useState(true);
     const [isSaving, setIsSaving] = useState(false);
 
+    const [ghToken, setGhToken] = useState('');
+    const isProd = import.meta.env.PROD;
+
     useEffect(() => {
-        // Try to load from local storage first for better UX on static sites
+        // Load persisted config and token
         const localConfig = localStorage.getItem('event_config');
         if (localConfig) {
             setConfig(JSON.parse(localConfig));
             setLoadingConfig(false);
         }
 
-        // Always try to fetch from API to get the "Truth" from server/repo
-        // In PROD (GitHub Pages), fetch the static JSON file copied by deploy workflow
-        const url = import.meta.env.PROD ? './data/event_config.json' : '/api/config';
+        const localToken = localStorage.getItem('gh_token');
+        if (localToken) setGhToken(localToken);
 
+        // Fetch Truth from server/repo
+        const url = isProd ? './data/event_config.json' : '/api/config';
         fetch(url)
             .then(res => {
                 if (!res.ok) throw new Error('No backend API or Config File');
@@ -58,38 +62,71 @@ const EventMonitor: React.FC<EventMonitorProps> = ({ eventStats }) => {
                 setLoadingConfig(false);
             })
             .catch(() => {
-                // If API fails (static site), and we have no local config, stop loading
                 if (!localConfig) setLoadingConfig(false);
             });
-    }, []);
+    }, [isProd]);
 
-    const handleSave = () => {
+    const handleSave = async () => {
         setIsSaving(true);
-        fetch('/api/config', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(config)
-        })
-            .then(res => {
+
+        // Save token locally
+        if (ghToken) localStorage.setItem('gh_token', ghToken);
+
+        // 1. Try Git Dispatch (Permanent Save) if token exists
+        if (ghToken && isProd) {
+            try {
+                const response = await fetch(`https://api.github.com/repos/ucwLeonardo/dashboard/dispatches`, {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/vnd.github.v3+json',
+                        'Authorization': `token ${ghToken}`
+                    },
+                    body: JSON.stringify({
+                        event_type: 'update-event-config',
+                        client_payload: config
+                    })
+                });
+
+                if (!response.ok) throw new Error(`GitHub API Error: ${response.statusText}`);
+
+                alert('Update request sent to GitHub!\n\nThis will trigger a background workflow to update the repository and re-scrape the data. The dashboard will update in a few minutes.');
+                setIsSaving(false);
+                return;
+            } catch (err) {
+                console.error("GitHub Dispatch failed", err);
+                alert('Failed to send update to GitHub. Check your Token and Permissions.\nFalling back to local save.');
+            }
+        }
+
+        // 2. Fallback / Dev Mode Save
+        const apiMethods = isProd ? [] : [
+            fetch('/api/config', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(config)
+            })
+        ];
+
+        try {
+            if (!isProd) {
+                const res = await apiMethods[0];
                 if (!res.ok) throw new Error(res.statusText);
-                return res.json();
-            })
-            .then(() => {
-                setIsSaving(false);
-                alert('Config saved! Scraper triggered in background.');
-                // Also save to local storage
-                localStorage.setItem('event_config', JSON.stringify(config));
-            })
-            .catch(err => {
-                console.warn("Backend save failed (expected on static site), falling back to local storage", err);
+            }
+            // Local Storage Save
+            localStorage.setItem('event_config', JSON.stringify(config));
 
-                // Fallback: Save to Local Storage
-                localStorage.setItem('event_config', JSON.stringify(config));
-                setIsSaving(false);
-
-                // Show a helpful, non-error message
-                alert('Configuration saved to your browser (Local Only).\n\nSince this is a static site, the public background scraper cannot be triggered from here. The dashboard will continue to show data from the repository configuration.');
-            });
+            if (!isProd) {
+                alert('Config saved to local backend!');
+            } else {
+                alert('Config saved LOCALLY only.\n\nTo update the live scraper, please provide a GitHub Personal Access Token.');
+            }
+        } catch (err) {
+            console.warn("Save failed", err);
+            localStorage.setItem('event_config', JSON.stringify(config));
+            alert('Saved to Browser Storage (Local Only).');
+        } finally {
+            setIsSaving(false);
+        }
     };
 
     if (loadingConfig) return <div>Loading Event Config...</div>;
@@ -119,6 +156,22 @@ const EventMonitor: React.FC<EventMonitorProps> = ({ eventStats }) => {
                         placeholder="https://www.nvidia.cn/..."
                     />
                 </div>
+
+                {isProd && (
+                    <div className="input-group" style={{ marginTop: '20px', borderTop: '1px solid var(--border-color)', paddingTop: '20px' }}>
+                        <label>GitHub Token (Optional - For Saving to Repo):</label>
+                        <input
+                            type="password"
+                            value={ghToken}
+                            onChange={e => setGhToken(e.target.value)}
+                            placeholder="ghp_..."
+                        />
+                        <p style={{ fontSize: '0.8rem', color: 'var(--label-color)', marginTop: '5px' }}>
+                            Required to trigger the scraper from this static page.
+                        </p>
+                    </div>
+                )}
+
                 <button onClick={handleSave} disabled={isSaving} className="save-btn">
                     {isSaving ? 'Saving...' : 'Save & Scrape'}
                 </button>
