@@ -37,16 +37,26 @@ const EventMonitor: React.FC<EventMonitorProps> = ({ eventStats }) => {
     const [isSaving, setIsSaving] = useState(false);
 
     useEffect(() => {
-        // Fetch config
+        // Try to load from local storage first for better UX on static sites
+        const localConfig = localStorage.getItem('event_config');
+        if (localConfig) {
+            setConfig(JSON.parse(localConfig));
+            setLoadingConfig(false);
+        }
+
+        // Always try to fetch from API to get the "Truth" from server/repo
         fetch('/api/config')
-            .then(res => res.json())
+            .then(res => {
+                if (!res.ok) throw new Error('No backend API');
+                return res.json();
+            })
             .then(data => {
                 setConfig(data);
                 setLoadingConfig(false);
             })
-            .catch(err => {
-                console.error("Failed to load config", err);
-                setLoadingConfig(false);
+            .catch(() => {
+                // If API fails (static site), and we have no local config, stop loading
+                if (!localConfig) setLoadingConfig(false);
             });
     }, []);
 
@@ -57,15 +67,25 @@ const EventMonitor: React.FC<EventMonitorProps> = ({ eventStats }) => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(config)
         })
-            .then(res => res.json())
+            .then(res => {
+                if (!res.ok) throw new Error(res.statusText);
+                return res.json();
+            })
             .then(() => {
                 setIsSaving(false);
-                alert('Config saved! Scraper triggered in background. Please refresh page in a minute.');
+                alert('Config saved! Scraper triggered in background.');
+                // Also save to local storage
+                localStorage.setItem('event_config', JSON.stringify(config));
             })
             .catch(err => {
-                console.error("Failed to save config", err);
+                console.warn("Backend save failed (expected on static site), falling back to local storage", err);
+
+                // Fallback: Save to Local Storage
+                localStorage.setItem('event_config', JSON.stringify(config));
                 setIsSaving(false);
-                alert('Failed to save config');
+
+                // Show a helpful, non-error message
+                alert('Configuration saved to your browser (Local Only).\n\nSince this is a static site, the public background scraper cannot be triggered from here. The dashboard will continue to show data from the repository configuration.');
             });
     };
 
