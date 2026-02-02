@@ -44,3 +44,4 @@ The monitoring system is designed to track and compare NVIDIA Deep Learning Inst
 
 ## Development Guidelines
 *   **Git Workflow**: Always pull the repository (`git pull --rebase origin main`) before pushing code changes to avoid conflicts and rejected pushes.
+*   **Memory Rule**: If a user request begins with the word "remember", the agent must rephrase the instruction and document it in this file (`AGENT_LOGIC.md`) to ensure future agents follow the rule.
