@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-02-02T02:08:50.563Z",
+  "timestamp": "2026-02-02T03:28:43.057Z",
   "current": {
     "hq": {
       "sections": [
@@ -845,6 +845,16 @@
         }
       ],
       "total": 83
+    },
+    "event": {
+      "hq": {
+        "sections": [],
+        "total": 0
+      },
+      "china": {
+        "sections": [],
+        "total": 0
+      }
     }
   },
   "previous": {
@@ -1692,6 +1702,16 @@
         }
       ],
       "total": 83
+    },
+    "event": {
+      "hq": {
+        "sections": [],
+        "total": 0
+      },
+      "china": {
+        "sections": [],
+        "total": 0
+      }
     }
   }
 }
