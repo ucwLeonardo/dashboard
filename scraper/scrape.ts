@@ -383,7 +383,23 @@ async function main() {
         }
     }
 
-    const [hq, china] = await Promise.all([scrapeHQ(), scrapeChina()]);
+    // Scrape with error handling for each source
+    let hq = { sections: [], total: 0 };
+    let china = { sections: [], total: 0 };
+
+    try {
+        hq = await scrapeHQ();
+        console.log(`✓ HQ scrape successful: ${hq.total} courses`);
+    } catch (e) {
+        console.error('✗ HQ scrape failed:', e);
+    }
+
+    try {
+        china = await scrapeChina();
+        console.log(`✓ China scrape successful: ${china.total} courses`);
+    } catch (e) {
+        console.error('✗ China scrape failed:', e);
+    }
 
     // Scrape events if URLs are provided
     let eventHQ: { sections: SectionData[], total: number } = { sections: [], total: 0 };
@@ -393,8 +409,9 @@ async function main() {
         console.log(`Scraping HQ Event: ${eventConfig.hqUrl}`);
         try {
             eventHQ = await scrapeGTCEvent(eventConfig.hqUrl, false);
+            console.log(`✓ HQ Event scrape successful: ${eventHQ.total} sessions`);
         } catch (e) {
-            console.error('Error scraping HQ Event:', e);
+            console.error('✗ HQ Event scrape failed:', e);
         }
     }
 
@@ -402,8 +419,9 @@ async function main() {
         console.log(`Scraping China Event: ${eventConfig.chinaUrl}`);
         try {
             eventChina = await scrapeGTCEvent(eventConfig.chinaUrl, true);
+            console.log(`✓ China Event scrape successful: ${eventChina.total} sessions`);
         } catch (e) {
-            console.error('Error scraping China Event:', e);
+            console.error('✗ China Event scrape failed:', e);
         }
     }
 
@@ -430,7 +448,7 @@ async function main() {
         }
     }
 
-    // Save new data
+    // Save new data - ALWAYS update timestamp
     const data = {
         timestamp: new Date().toISOString(),
         current: {
@@ -446,7 +464,8 @@ async function main() {
 
     fs.mkdirSync(path.dirname(STATS_FILE), { recursive: true });
     fs.writeFileSync(STATS_FILE, JSON.stringify(data, null, 2));
-    console.log('Stats saved to', STATS_FILE);
+    console.log('✓ Stats saved to', STATS_FILE);
+    console.log('✓ Timestamp updated to:', data.timestamp);
 }
 
 import { fileURLToPath } from 'url';
