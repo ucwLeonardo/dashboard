@@ -22,6 +22,18 @@ async function scrapeHQ(url = 'https://www.nvidia.com/en-us/training/self-paced-
     try {
         await page.goto(url, { waitUntil: 'networkidle', timeout: 30000 });
 
+        // Dismiss cookie banner if present (OneTrust)
+        try {
+            const acceptButton = page.locator('#onetrust-accept-btn-handler, button:has-text("Accept All"), button:has-text("Accept Cookies")').first();
+            if (await acceptButton.count() > 0) {
+                await acceptButton.click({ timeout: 5000 });
+                console.log('✓ Dismissed cookie banner');
+                await page.waitForTimeout(1000);
+            }
+        } catch (e) {
+            console.log('No cookie banner found or already dismissed');
+        }
+
         // Wait for DLI widget content
         try {
             await page.waitForSelector('.dli--card', { timeout: 10000 });
