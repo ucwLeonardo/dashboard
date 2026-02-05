@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-02-04T22:28:11.532Z",
+  "timestamp": "2026-02-05T22:27:08.731Z",
   "current": {
     "hq": {
       "sections": [
@@ -1059,7 +1059,7 @@
         },
         {
           "title": "Data Science",
-          "count": 12,
+          "count": 11,
           "courses": [
             {
               "title": "Accelerate Data Science Workflows with Zero Code Changes",
@@ -1115,11 +1115,6 @@
               "title": "Accelerating Portfolio Optimization",
               "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-DS-09+V1",
               "price": "$30"
-            },
-            {
-              "title": "加速端到端的数据科学工作流",
-              "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-DS-01+V2-ZH",
-              "price": "Free"
             }
           ]
         },
@@ -1412,7 +1407,7 @@
           ]
         }
       ],
-      "total": 73
+      "total": 72
     },
     "china": {
       "sections": [
