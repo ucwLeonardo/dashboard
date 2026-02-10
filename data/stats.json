@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-02-09T22:36:47.454Z",
+  "timestamp": "2026-02-10T22:40:28.434Z",
   "current": {
     "hq": {
       "sections": [
@@ -61,7 +61,7 @@
             {
               "title": "Accelerating End-to-End Data Science Workflows",
               "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-DS-01+V2",
-              "price": "Free"
+              "price": "$90"
             },
             {
               "title": "Accelerate Data Science and Leverage Foundation Models in Digital Biology",
