@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-02-19T22:32:35.801Z",
+  "timestamp": "2026-02-20T22:26:36.395Z",
   "current": {
     "hq": {
       "sections": [
@@ -1301,7 +1301,7 @@
             {
               "title": "Build a Deep Research Agent",
               "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-FX-40+V1",
-              "price": "Free"
+              "price": "$30"
             },
             {
               "title": "The Art of Compressing LLMs: Pruning, Distillation, and Quantization Demystified",
