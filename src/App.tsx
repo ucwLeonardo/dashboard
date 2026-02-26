@@ -111,13 +111,14 @@ const App: React.FC = () => {
       });
   }, []);
 
-  if (loading) return <div className="loading">加载中...</div>;
+  if (loading) return <div className="loading"><span className="loading-text">加载中...</span></div>;
 
   const hqDiff = getDiff(stats?.current.hq.sections || [], stats?.previous?.hq.sections);
   const chinaDiff = getDiff(stats?.current.china.sections || [], stats?.previous?.china.sections);
 
   return (
     <div className="container">
+      <div className="bg-gradient" aria-hidden="true" />
       <div className="theme-controls">
         <button
           className={`theme-btn ${theme === 'light' ? 'active' : ''}`}

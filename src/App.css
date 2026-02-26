@@ -1,30 +1,148 @@
+/* ==========================================================================
+   1. THEME TOKENS — DARK
+   ========================================================================== */
+
 :root[data-theme='dark'] {
-  --bg-color: #0d1117;
-  --card-bg: #161b22;
-  --text-color: #f0f6fc;
+  /* Backgrounds */
+  --bg-color: #09090b;
+  --bg-gradient-1: #09090b;
+  --bg-gradient-2: #18181b;
+  --bg-gradient-3: #09090b;
+
+  /* Glass card */
+  --card-bg: rgba(255, 255, 255, 0.06);
+  --card-border: rgba(255, 255, 255, 0.1);
+  --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --card-hover-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 20px rgba(118, 185, 0, 0.15);
+  --card-blur: blur(16px);
+
+  /* Text */
+  --text-color: #fafafa;
+  --header-text: #ffffff;
+  --label-color: #a1a1aa;
+
+  /* Accent */
   --accent-color: #76b900;
-  /* NVIDIA Green */
-  --border-color: #30363d;
-  --hover-border: #8b949e;
-  --header-text: #fff;
-  --label-color: #8b949e;
-  --diff-bg: #21262d;
-  --added-color: #3fb950;
-  --removed-color: #f85149;
+  --accent-glow: rgba(118, 185, 0, 0.3);
+
+  /* Borders & dividers */
+  --border-color: rgba(255, 255, 255, 0.08);
+  --divider-color: rgba(255, 255, 255, 0.06);
+  --hover-border: rgba(255, 255, 255, 0.18);
+
+  /* Diff panel */
+  --diff-bg: rgba(255, 255, 255, 0.03);
+  --diff-border: rgba(255, 255, 255, 0.06);
+  --diff-blur: blur(12px);
+
+  /* Status colors */
+  --added-color: #22c55e;
+  --added-bg: rgba(34, 197, 94, 0.12);
+  --removed-color: #ef4444;
+  --removed-bg: rgba(239, 68, 68, 0.12);
+
+  /* Theme toggle */
+  --toggle-bg: rgba(255, 255, 255, 0.06);
+  --toggle-border: rgba(255, 255, 255, 0.1);
+  --toggle-active-bg: var(--accent-color);
+  --toggle-active-text: #ffffff;
+  --toggle-text: #a1a1aa;
+
+  /* Focus ring */
+  --focus-ring: rgba(118, 185, 0, 0.5);
+
+  /* Gradient orbs (decorative background) */
+  --orb-1: rgba(118, 185, 0, 0.08);
+  --orb-2: rgba(118, 185, 0, 0.04);
+  --orb-3: rgba(59, 130, 246, 0.04);
 }
 
+/* ==========================================================================
+   2. THEME TOKENS — LIGHT
+   ========================================================================== */
+
 :root[data-theme='light'] {
-  --bg-color: #f6f8fa;
-  --card-bg: #ffffff;
-  --text-color: #24292f;
-  --accent-color: #2e7d32;
-  --border-color: #d0d7de;
-  --hover-border: #8b949e;
-  --header-text: #1f2328;
-  --label-color: #57606a;
-  --diff-bg: #f0f3f6;
-  --added-color: #1a7f37;
-  --removed-color: #cf222e;
+  /* Backgrounds */
+  --bg-color: #fafafa;
+  --bg-gradient-1: #fafafa;
+  --bg-gradient-2: #f4f4f5;
+  --bg-gradient-3: #fafafa;
+
+  /* Glass card */
+  --card-bg: rgba(255, 255, 255, 0.80);
+  --card-border: rgba(0, 0, 0, 0.08);
+  --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  --card-hover-shadow: 0 8px 32px rgba(0, 0, 0, 0.08), 0 0 20px rgba(77, 124, 15, 0.1);
+  --card-blur: blur(16px);
+
+  /* Text */
+  --text-color: #09090b;
+  --header-text: #09090b;
+  --label-color: #52525b;
+
+  /* Accent */
+  --accent-color: #4d7c0f;
+  --accent-glow: rgba(77, 124, 15, 0.2);
+
+  /* Borders & dividers */
+  --border-color: rgba(0, 0, 0, 0.06);
+  --divider-color: rgba(0, 0, 0, 0.06);
+  --hover-border: rgba(0, 0, 0, 0.15);
+
+  /* Diff panel */
+  --diff-bg: rgba(255, 255, 255, 0.60);
+  --diff-border: rgba(0, 0, 0, 0.06);
+  --diff-blur: blur(12px);
+
+  /* Status colors */
+  --added-color: #15803d;
+  --added-bg: rgba(21, 128, 61, 0.1);
+  --removed-color: #dc2626;
+  --removed-bg: rgba(220, 38, 38, 0.1);
+
+  /* Theme toggle */
+  --toggle-bg: rgba(0, 0, 0, 0.04);
+  --toggle-border: rgba(0, 0, 0, 0.1);
+  --toggle-active-bg: var(--accent-color);
+  --toggle-active-text: #ffffff;
+  --toggle-text: #52525b;
+
+  /* Focus ring */
+  --focus-ring: rgba(77, 124, 15, 0.5);
+
+  /* Gradient orbs */
+  --orb-1: rgba(77, 124, 15, 0.06);
+  --orb-2: rgba(77, 124, 15, 0.03);
+  --orb-3: rgba(59, 130, 246, 0.03);
+}
+
+/* ==========================================================================
+   3. GLOBAL TOKENS
+   ========================================================================== */
+
+:root {
+  width: 100%;
+  --transition-speed: 0.25s;
+  --transition-ease: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ==========================================================================
+   4. BASE STYLES
+   ========================================================================== */
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  -webkit-font-smoothing: antialiased;
+  transition:
+    background-color var(--transition-speed) var(--transition-ease),
+    color var(--transition-speed) var(--transition-ease);
 }
 
 #root {
@@ -35,26 +153,54 @@
   width: 100%;
 }
 
-:root {
-  width: 100%;
-  --transition-speed: 0.3s;
+/* ==========================================================================
+   5. GRADIENT BACKGROUND LAYER
+   ========================================================================== */
+
+.bg-gradient {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background:
+    linear-gradient(
+      180deg,
+      var(--bg-gradient-1) 0%,
+      var(--bg-gradient-2) 50%,
+      var(--bg-gradient-3) 100%
+    );
+  transition: background var(--transition-speed) var(--transition-ease);
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  overflow-x: hidden;
+.bg-gradient::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  left: -10%;
+  width: 60%;
+  height: 60%;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--orb-1) 0%, transparent 70%);
+  pointer-events: none;
 }
 
-body {
-  margin: 0;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  -webkit-font-smoothing: antialiased;
-  transition: background-color var(--transition-speed), color var(--transition-speed);
+.bg-gradient::after {
+  content: '';
+  position: absolute;
+  bottom: -10%;
+  right: -10%;
+  width: 50%;
+  height: 50%;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--orb-3) 0%, transparent 70%);
+  pointer-events: none;
 }
+
+/* ==========================================================================
+   6. CONTAINER & DASHBOARD LAYOUT
+   ========================================================================== */
 
 .container {
   width: 100%;
@@ -62,52 +208,6 @@ body {
   padding: 80px 40px 40px;
   position: relative;
   box-sizing: border-box;
-}
-
-/* Theme Controls */
-.theme-controls {
-  position: absolute;
-  top: 30px;
-  right: 40px;
-  display: flex;
-  gap: 0;
-  z-index: 100;
-}
-
-.theme-btn {
-  background: transparent;
-  border: 1px solid var(--border-color);
-  color: var(--label-color);
-  padding: 8px 24px;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: all 0.2s;
-  font-weight: 600;
-  text-transform: uppercase;
-  margin: 0;
-}
-
-.theme-btn:first-child {
-  border-radius: 6px 0 0 6px;
-  border-right: none;
-}
-
-.theme-btn:last-child {
-  border-radius: 0 6px 6px 0;
-}
-
-.theme-btn:hover {
-  background-color: rgba(127, 127, 127, 0.1);
-  color: var(--text-color);
-  z-index: 1;
-  /* Bring borders to top */
-}
-
-.theme-btn.active {
-  background-color: var(--accent-color);
-  color: #fff;
-  border-color: var(--accent-color);
-  box-shadow: none;
 }
 
 .dashboard {
@@ -137,6 +237,10 @@ body {
   display: block;
 }
 
+/* ==========================================================================
+   7. DASHBOARD HEADER
+   ========================================================================== */
+
 .dashboard-header {
   position: relative;
   margin-bottom: 40px;
@@ -150,6 +254,7 @@ body {
   font-size: 3rem;
   font-weight: 800;
   letter-spacing: -1px;
+  color: var(--header-text);
 }
 
 .update-time {
@@ -160,28 +265,84 @@ body {
   margin-right: 0;
 }
 
+/* ==========================================================================
+   8. THEME TOGGLE — GLASS PILL
+   ========================================================================== */
+
+.theme-controls {
+  position: absolute;
+  top: 30px;
+  right: 40px;
+  display: flex;
+  gap: 0;
+  z-index: 100;
+  background: var(--toggle-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--toggle-border);
+  border-radius: 9999px;
+  padding: 4px;
+  transition: all var(--transition-speed) var(--transition-ease);
+}
+
+.theme-btn {
+  background: transparent;
+  border: none;
+  color: var(--toggle-text);
+  padding: 8px 20px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s var(--transition-ease);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-radius: 9999px;
+  margin: 0;
+}
+
+.theme-btn:hover {
+  color: var(--text-color);
+}
+
+.theme-btn:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.theme-btn.active {
+  background-color: var(--toggle-active-bg);
+  color: var(--toggle-active-text);
+  box-shadow: 0 2px 8px var(--accent-glow);
+}
+
+/* ==========================================================================
+   9. GLASS CARDS
+   ========================================================================== */
+
 .section-card {
-  background-color: var(--card-bg);
-  border: 1px solid var(--border-color);
+  background: var(--card-bg);
+  backdrop-filter: var(--card-blur);
+  -webkit-backdrop-filter: var(--card-blur);
+  border: 1px solid var(--card-border);
   border-radius: 24px;
   padding: 40px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  transition: all var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--card-shadow);
+  transition: all var(--transition-speed) var(--transition-ease);
   width: 100%;
   position: relative;
   overflow: hidden;
   box-sizing: border-box;
 }
 
-[data-theme='dark'] .section-card {
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+.section-card:hover {
+  box-shadow: var(--card-hover-shadow);
+  border-color: var(--hover-border);
+  transform: translateY(-2px);
 }
 
-.section-card:hover {
-  transform: translateY(-5px);
-  /* Removed border-color change */
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-}
+/* ==========================================================================
+   10. HERO NUMBERS & DELTA BADGES
+   ========================================================================== */
 
 .total-container {
   display: flex;
@@ -196,93 +357,50 @@ body {
   font-weight: 800;
   color: var(--accent-color);
   line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+[data-theme='dark'] .total-count {
+  text-shadow: 0 0 30px var(--accent-glow);
 }
 
 .delta {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 700;
-  padding: 4px 10px;
-  border-radius: 8px;
+  padding: 4px 14px;
+  border-radius: 9999px;
   margin-top: 10px;
+  font-variant-numeric: tabular-nums;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid transparent;
 }
 
 .delta.plus {
-  background-color: rgba(63, 185, 80, 0.15);
+  background-color: var(--added-bg);
   color: var(--added-color);
+  border-color: rgba(34, 197, 94, 0.2);
 }
 
 .delta.minus {
-  background-color: rgba(248, 81, 73, 0.15);
+  background-color: var(--removed-bg);
   color: var(--removed-color);
+  border-color: rgba(239, 68, 68, 0.2);
 }
 
-.diff-list {
-  background-color: var(--diff-bg);
-  border-radius: 16px;
-  padding: 20px;
-  text-align: left;
-  border: 1px solid var(--border-color);
-  animation: fadeIn 0.5s ease;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.diff-group h3 {
-  font-size: 1rem;
-  margin-top: 0;
-  margin-bottom: 12px;
-  color: var(--label-color);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.diff-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 8px 0;
-  font-size: 0.95rem;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.diff-item:last-child {
-  border-bottom: none;
-}
-
-.diff-item a {
-  color: var(--accent-color);
-  text-decoration: none;
-}
-
-.diff-item a:hover {
-  text-decoration: underline;
-}
-
-.diff-item .price {
-  font-size: 0.85rem;
-  color: var(--label-color);
-  background: rgba(0, 0, 0, 0.05);
-  padding: 2px 6px;
-  border-radius: 4px;
-}
-
-[data-theme='dark'] .diff-item .price {
-  background: rgba(255, 255, 255, 0.05);
-}
+/* ==========================================================================
+   11. SUB-SECTIONS & STAT ITEMS
+   ========================================================================== */
 
 .sub-sections {
   margin-top: 40px;
   text-align: left;
+}
+
+.stat-item-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
 }
 
 .stat-item {
@@ -290,7 +408,25 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 16px 0;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--divider-color);
+  transition: background-color 0.15s var(--transition-ease);
+}
+
+.stat-item:last-child {
+  border-bottom: none;
+}
+
+.stat-item-link:hover .stat-item {
+  background-color: rgba(127, 127, 127, 0.05);
+  border-radius: 8px;
+  margin: 0 -8px;
+  padding: 16px 8px;
+}
+
+.stat-item-link:focus-visible .stat-item {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+  border-radius: 8px;
 }
 
 .label {
@@ -302,7 +438,95 @@ body {
 .value {
   font-size: 1.5rem;
   font-weight: 700;
+  font-variant-numeric: tabular-nums;
 }
+
+/* ==========================================================================
+   12. DIFF LIST PANEL — FROSTED GLASS
+   ========================================================================== */
+
+.diff-list {
+  background: var(--diff-bg);
+  backdrop-filter: var(--diff-blur);
+  -webkit-backdrop-filter: var(--diff-blur);
+  border-radius: 16px;
+  padding: 20px;
+  text-align: left;
+  border: 1px solid var(--diff-border);
+  margin-top: 16px;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.diff-group h3 {
+  font-size: 0.85rem;
+  margin-top: 0;
+  margin-bottom: 12px;
+  color: var(--label-color);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 600;
+}
+
+.diff-group.added h3 {
+  color: var(--added-color);
+}
+
+.diff-group.removed h3 {
+  color: var(--removed-color);
+}
+
+.diff-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  font-size: 0.95rem;
+  border-bottom: 1px solid var(--divider-color);
+}
+
+.diff-item:last-child {
+  border-bottom: none;
+}
+
+.diff-item a {
+  color: var(--accent-color);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.diff-item a:hover {
+  text-decoration: underline;
+}
+
+.diff-item a:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.diff-item .price {
+  font-size: 0.85rem;
+  color: var(--label-color);
+  background: rgba(127, 127, 127, 0.08);
+  padding: 2px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   13. LOADING STATE — PULSE ANIMATION
+   ========================================================================== */
 
 .loading {
   display: flex;
@@ -313,11 +537,27 @@ body {
   color: var(--accent-color);
 }
 
-/* Event Monitor Styles */
+.loading-text {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+/* ==========================================================================
+   14. EVENT MONITOR
+   ========================================================================== */
+
 .event-monitor {
   margin-top: 60px;
   padding: 40px;
-  border-top: 1px solid var(--border-color);
+  border-top: 1px solid var(--divider-color);
   max-width: 1000px;
   margin-left: auto;
   margin-right: auto;
@@ -331,10 +571,12 @@ body {
 }
 
 .config-section {
-  background-color: var(--card-bg);
+  background: var(--card-bg);
+  backdrop-filter: var(--card-blur);
+  -webkit-backdrop-filter: var(--card-blur);
   padding: 30px;
   border-radius: 16px;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--card-border);
   margin-bottom: 40px;
   display: flex;
   flex-direction: column;
@@ -358,10 +600,19 @@ body {
 .input-group input {
   padding: 12px;
   border-radius: 8px;
-  border: 1px solid var(--border-color);
-  background-color: var(--bg-color);
+  border: 1px solid var(--card-border);
+  background: rgba(127, 127, 127, 0.06);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   color: var(--text-color);
   font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px var(--focus-ring);
 }
 
 .save-btn {
@@ -373,11 +624,17 @@ body {
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.2s var(--transition-ease);
 }
 
 .save-btn:hover {
   filter: brightness(1.1);
+  box-shadow: 0 4px 12px var(--accent-glow);
+}
+
+.save-btn:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
 }
 
 .event-cards {
@@ -407,4 +664,180 @@ body {
 
 .event-cards .card-wrapper {
   min-width: 300px;
+}
+
+/* ==========================================================================
+   15. ACCESSIBILITY
+   ========================================================================== */
+
+*:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+a,
+button,
+.card-link,
+.stat-item-link,
+.theme-btn,
+.save-btn {
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ==========================================================================
+   16. RESPONSIVE BREAKPOINTS
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+  .container {
+    padding: 70px 24px 32px;
+  }
+
+  .theme-controls {
+    top: 24px;
+    right: 24px;
+  }
+
+  .dashboard-header h1 {
+    font-size: 2.5rem;
+  }
+
+  .total-count {
+    font-size: 4.5rem;
+  }
+
+  .event-monitor {
+    padding: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 100px 16px 24px;
+  }
+
+  .theme-controls {
+    top: 16px;
+    right: 16px;
+  }
+
+  .card-wrapper {
+    min-width: 100%;
+  }
+
+  .cards-container {
+    gap: 24px;
+  }
+
+  .section-card {
+    padding: 28px;
+    border-radius: 20px;
+  }
+
+  .total-count {
+    font-size: 4rem;
+  }
+
+  .dashboard-header h1 {
+    font-size: 2rem;
+  }
+
+  .label {
+    font-size: 1.1rem;
+  }
+
+  .value {
+    font-size: 1.3rem;
+  }
+
+  .event-cards .card-wrapper {
+    min-width: 100%;
+  }
+
+  .event-monitor {
+    padding: 24px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 90px 12px 20px;
+  }
+
+  .theme-controls {
+    top: 12px;
+    right: 12px;
+  }
+
+  .theme-btn {
+    padding: 6px 14px;
+    font-size: 0.75rem;
+  }
+
+  .dashboard-header h1 {
+    font-size: 1.75rem;
+  }
+
+  .total-count {
+    font-size: 3.2rem;
+  }
+
+  .delta {
+    font-size: 1.1rem;
+    padding: 3px 10px;
+  }
+
+  .section-card {
+    padding: 20px;
+    border-radius: 16px;
+  }
+
+  .label {
+    font-size: 1rem;
+  }
+
+  .value {
+    font-size: 1.15rem;
+  }
+
+  .stat-item {
+    padding: 12px 0;
+  }
+
+  .diff-list {
+    padding: 16px;
+    border-radius: 12px;
+  }
+
+  #root {
+    padding: 1rem;
+  }
+}
+
+/* ==========================================================================
+   17. SMOOTH THEME TRANSITIONS
+   ========================================================================== */
+
+.section-card,
+.diff-list,
+.event-monitor,
+.config-section,
+.theme-controls,
+.input-group input {
+  transition:
+    background var(--transition-speed) var(--transition-ease),
+    border-color var(--transition-speed) var(--transition-ease),
+    box-shadow var(--transition-speed) var(--transition-ease),
+    color var(--transition-speed) var(--transition-ease);
 }
