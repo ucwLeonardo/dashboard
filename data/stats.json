@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-02-28T22:22:58.683Z",
+  "timestamp": "2026-03-01T22:24:13.900Z",
   "current": {
     "hq": {
       "sections": [
@@ -1312,7 +1312,7 @@
         },
         {
           "title": "Graphics and Simulation",
-          "count": 17,
+          "count": 16,
           "courses": [
             {
               "title": "Develop, Customize, and Publish in Omniverse With Extensions",
@@ -1322,11 +1322,6 @@
             {
               "title": "An Introduction to Developing With NVIDIA Omniverse",
               "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-OV-11+V1",
-              "price": "Free"
-            },
-            {
-              "title": "How to Build a Native OpenUSD XR Application",
-              "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-OV-12+V1",
               "price": "Free"
             },
             {
@@ -1402,7 +1397,7 @@
           ]
         }
       ],
-      "total": 72
+      "total": 71
     },
     "china": {
       "sections": [
