@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-01T22:24:13.900Z",
+  "timestamp": "2026-03-02T22:27:03.319Z",
   "current": {
     "hq": {
       "sections": [
@@ -303,7 +303,7 @@
           ]
         },
         {
-          "title": "Graphics and Simulation",
+          "title": "Simulation and Physical AI",
           "count": 16,
           "courses": [
             {
