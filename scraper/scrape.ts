@@ -466,18 +466,36 @@ async function main() {
         event: { hq: { sections: [], total: 0 }, china: { sections: [], total: 0 } }
     };
 
+    let changesHistory: ChangeEntry[] = [];
     if (fs.existsSync(STATS_FILE)) {
         try {
             const existing = JSON.parse(fs.readFileSync(STATS_FILE, 'utf-8'));
             previous = existing.current || previous;
-            // Ensure structure compatibility if upgrading from old stats
             if (!previous.event) {
                 previous.event = { hq: { sections: [], total: 0 }, china: { sections: [], total: 0 } };
             }
+            changesHistory = existing.changesHistory || [];
         } catch (e) {
             console.log('Error reading existing stats');
         }
     }
+
+    // Compute diff and update history
+    const hqDiff = computeDiff(hq, previous.hq);
+    const chinaDiff = computeDiff(china, previous.china);
+
+    if (hqDiff.added.length > 0 || hqDiff.removed.length > 0 ||
+        chinaDiff.added.length > 0 || chinaDiff.removed.length > 0) {
+        changesHistory.push({
+            timestamp: new Date().toISOString(),
+            hq: hqDiff,
+            china: chinaDiff
+        });
+    }
+
+    // Prune entries older than 7 days
+    const cutoff = Date.now() - 7 * 24 * 60 * 60 * 1000;
+    changesHistory = changesHistory.filter(e => new Date(e.timestamp).getTime() > cutoff);
 
     // Save new data - ALWAYS update timestamp
     const data = {
@@ -490,7 +508,8 @@ async function main() {
                 china: eventChina
             }
         },
-        previous
+        previous,
+        changesHistory
     };
 
     fs.mkdirSync(path.dirname(STATS_FILE), { recursive: true });
