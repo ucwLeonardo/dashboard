@@ -16,6 +16,17 @@ interface SectionData {
     courses: Course[];
 }
 
+interface DiffResult {
+    added: Course[];
+    removed: Course[];
+}
+
+interface ChangeEntry {
+    timestamp: string;
+    hq: DiffResult;
+    china: DiffResult;
+}
+
 async function scrapeHQ(url = 'https://www.nvidia.com/en-us/training/self-paced-courses/') {
     const browser = await chromium.launch({ headless: true });
     const page = await browser.newPage();
@@ -377,6 +388,14 @@ async function scrapeGTCEvent(url: string, isChina: boolean = false) {
     } finally {
         await browser.close();
     }
+}
+
+function computeDiff(current: { sections: SectionData[] }, previous: { sections: SectionData[] }): DiffResult {
+    const currentCourses = current.sections.flatMap(s => s.courses);
+    const previousCourses = previous.sections.flatMap(s => s.courses);
+    const added = currentCourses.filter(c => !previousCourses.find(p => p.url === c.url));
+    const removed = previousCourses.filter(p => !currentCourses.find(c => p.url === c.url));
+    return { added, removed };
 }
 
 const CONFIG_FILE = path.join(process.cwd(), 'data', 'event_config.json');
