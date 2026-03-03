@@ -137,7 +137,7 @@ const App: React.FC = () => {
       <div className="dashboard">
         <header className="dashboard-header">
           <h1>DLI Dashboard</h1>
-          <p className="update-time">Last Update: {stats ? new Date(stats.timestamp).toLocaleString('en-US') : 'Unknown'}</p>
+          <p className="update-time">Last Update: {stats ? new Date(stats.timestamp).toLocaleString('en-US', { dateStyle: 'short', timeStyle: 'short' }) : 'Unknown'}</p>
         </header>
 
         <main className="cards-container">
