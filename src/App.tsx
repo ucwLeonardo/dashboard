@@ -19,8 +19,20 @@ interface RegionData {
   total: number;
 }
 
+interface DiffResult {
+  added: Course[];
+  removed: Course[];
+}
+
+interface ChangeEntry {
+  timestamp: string;
+  hq: DiffResult;
+  china: DiffResult;
+}
+
 interface Stats {
   timestamp: string;
+  changesHistory?: ChangeEntry[];
   current: {
     hq: RegionData;
     china: RegionData;
@@ -82,16 +94,14 @@ const App: React.FC = () => {
     });
   };
 
-  const getDiff = (current: Section[], previous?: Section[]) => {
-    if (!previous) return { added: [], removed: [], delta: 0 };
-
-    const currentCourses = current.flatMap(s => s.courses);
-    const previousCourses = previous.flatMap(s => s.courses);
-
-    const added = currentCourses.filter(c => !previousCourses.find(p => p.url === c.url));
-    const removed = previousCourses.filter(p => !currentCourses.find(c => p.url === c.url));
-
-    return { added, removed, delta: added.length - removed.length };
+  const getAccumulatedDiff = (history: ChangeEntry[] | undefined, region: 'hq' | 'china') => {
+    if (!history || history.length === 0) return { added: [], removed: [], delta: 0 };
+    const allAdded = history.flatMap(e => e[region].added);
+    const allRemoved = history.flatMap(e => e[region].removed);
+    // Net effect: added but not subsequently removed
+    const netAdded = allAdded.filter(a => !allRemoved.find(r => r.url === a.url));
+    const netRemoved = allRemoved.filter(r => !allAdded.find(a => a.url === r.url));
+    return { added: netAdded, removed: netRemoved, delta: netAdded.length - netRemoved.length };
   };
 
   useEffect(() => {
@@ -113,8 +123,8 @@ const App: React.FC = () => {
 
   if (loading) return <div className="loading"><span className="loading-text">加载中...</span></div>;
 
-  const hqDiff = getDiff(stats?.current.hq.sections || [], stats?.previous?.hq.sections);
-  const chinaDiff = getDiff(stats?.current.china.sections || [], stats?.previous?.china.sections);
+  const hqDiff = getAccumulatedDiff(stats?.changesHistory, 'hq');
+  const chinaDiff = getAccumulatedDiff(stats?.changesHistory, 'china');
 
   return (
     <div className="container">
