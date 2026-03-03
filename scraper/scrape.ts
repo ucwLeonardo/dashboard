@@ -476,13 +476,16 @@ async function main() {
             }
             changesHistory = existing.changesHistory || [];
         } catch (e) {
-            console.log('Error reading existing stats');
+            console.error('Error reading existing stats file:', STATS_FILE, e);
         }
     }
 
     // Compute diff and update history
-    const hqDiff = computeDiff(hq, previous.hq);
-    const chinaDiff = computeDiff(china, previous.china);
+    // Guard: skip diff for a region if scrape returned 0 courses but previous had courses (likely a scrape failure)
+    const hqScrapeSucceeded = hq.total > 0 || previous.hq.total === 0;
+    const chinaScrapeSucceeded = china.total > 0 || previous.china.total === 0;
+    const hqDiff = hqScrapeSucceeded ? computeDiff(hq, previous.hq) : { added: [], removed: [] };
+    const chinaDiff = chinaScrapeSucceeded ? computeDiff(china, previous.china) : { added: [], removed: [] };
 
     if (hqDiff.added.length > 0 || hqDiff.removed.length > 0 ||
         chinaDiff.added.length > 0 || chinaDiff.removed.length > 0) {
