@@ -55,7 +55,7 @@ const App: React.FC = () => {
     'Generative AI/LLM',
     'Deep Learning',
     'Accelerated Computing',
-    'Graphics and Simulation',
+    'Simulation and Physical AI',
     'Data Science'
   ];
 
