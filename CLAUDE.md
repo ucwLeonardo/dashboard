@@ -61,3 +61,7 @@ In development: Vite proxies `/api/*` to Express backend on port 3001.
 - Vite base path is `/dashboard/` for GitHub Pages
 - Production frontend reads static files (`./data/stats.json`); dev uses API proxy
 - Git workflow: pull with rebase (`git pull --rebase origin main`) before pushing
+- **Git push**: SSH/network only works from `/home/ubuntu/project/dashboard`. Always push with `dangerouslyDisableSandbox: true` from that directory:
+  ```bash
+  cd /home/ubuntu/project/<project> && git pull --rebase origin main && git push origin main
+  ```
