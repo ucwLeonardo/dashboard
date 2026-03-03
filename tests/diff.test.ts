@@ -7,57 +7,127 @@ interface Course {
     price: string;
 }
 
-interface Section {
-    title: string;
-    count: number;
-    courses: Course[];
+interface DiffResult {
+    added: Course[];
+    removed: Course[];
 }
 
-// Replicating the logic from App.tsx (or importing if refactored to shared utility)
-const getDiff = (current: Section[], previous?: Section[]) => {
-    if (!previous) return { added: [], removed: [], delta: 0 };
+interface ChangeEntry {
+    timestamp: string;
+    hq: DiffResult;
+    china: DiffResult;
+}
 
-    const currentCourses = current.flatMap(s => s.courses);
-    const previousCourses = previous.flatMap(s => s.courses);
-
-    const added = currentCourses.filter(c => !previousCourses.find(p => p.url === c.url));
-    const removed = previousCourses.filter(p => !currentCourses.find(c => p.url === c.url));
-
-    return { added, removed, delta: added.length - removed.length };
+// Copied from App.tsx (cannot import directly since it's embedded in a React component)
+const getAccumulatedDiff = (history: ChangeEntry[] | undefined, region: 'hq' | 'china') => {
+    if (!history || history.length === 0) return { added: [], removed: [], delta: 0 };
+    const allAdded = history.flatMap(e => e[region].added);
+    const allRemoved = history.flatMap(e => e[region].removed);
+    const netAdded = allAdded
+        .filter(a => !allRemoved.find(r => r.url === a.url))
+        .filter((a, i, arr) => arr.findIndex(x => x.url === a.url) === i);
+    const netRemoved = allRemoved
+        .filter(r => !allAdded.find(a => a.url === r.url))
+        .filter((r, i, arr) => arr.findIndex(x => x.url === r.url) === i);
+    return { added: netAdded, removed: netRemoved, delta: netAdded.length - netRemoved.length };
 };
 
-describe('Diff Logic', () => {
+const makeEntry = (
+    added: Course[],
+    removed: Course[],
+    timestamp = '2024-01-01T00:00:00Z'
+): ChangeEntry => ({
+    timestamp,
+    hq: { added, removed },
+    china: { added: [], removed: [] },
+});
+
+describe('getAccumulatedDiff', () => {
     const courseA = { title: 'A', url: 'http://a', price: 'Free' };
     const courseB = { title: 'B', url: 'http://b', price: 'Free' };
     const courseC = { title: 'C', url: 'http://c', price: 'Free' };
 
-    it('should detect added courses', () => {
-        const prev = [{ title: 'S1', count: 1, courses: [courseA] }];
-        const curr = [{ title: 'S1', count: 2, courses: [courseA, courseB] }];
-
-        const diff = getDiff(curr, prev);
-        expect(diff.added).toHaveLength(1);
-        expect(diff.added[0].title).toBe('B');
-        expect(diff.delta).toBe(1);
+    // Case 1: Empty history
+    it('returns empty result for undefined history', () => {
+        const result = getAccumulatedDiff(undefined, 'hq');
+        expect(result).toEqual({ added: [], removed: [], delta: 0 });
     });
 
-    it('should detect removed courses', () => {
-        const prev = [{ title: 'S1', count: 2, courses: [courseA, courseB] }];
-        const curr = [{ title: 'S1', count: 1, courses: [courseA] }];
-
-        const diff = getDiff(curr, prev);
-        expect(diff.removed).toHaveLength(1);
-        expect(diff.removed[0].title).toBe('B');
-        expect(diff.delta).toBe(-1);
+    it('returns empty result for empty history array', () => {
+        const result = getAccumulatedDiff([], 'hq');
+        expect(result).toEqual({ added: [], removed: [], delta: 0 });
     });
 
-    it('should handle no changes', () => {
-        const prev = [{ title: 'S1', count: 1, courses: [courseA] }];
-        const curr = [{ title: 'S1', count: 1, courses: [courseA] }];
+    // Case 2: Single entry with additions
+    it('returns added courses from a single entry', () => {
+        const history = [makeEntry([courseA, courseB], [])];
+        const result = getAccumulatedDiff(history, 'hq');
+        expect(result.added).toHaveLength(2);
+        expect(result.added.map(c => c.url)).toContain('http://a');
+        expect(result.added.map(c => c.url)).toContain('http://b');
+        expect(result.removed).toHaveLength(0);
+        expect(result.delta).toBe(2);
+    });
 
-        const diff = getDiff(curr, prev);
-        expect(diff.added).toHaveLength(0);
-        expect(diff.removed).toHaveLength(0);
-        expect(diff.delta).toBe(0);
+    // Case 3: Single entry with removals
+    it('returns removed courses from a single entry', () => {
+        const history = [makeEntry([], [courseA, courseB])];
+        const result = getAccumulatedDiff(history, 'hq');
+        expect(result.removed).toHaveLength(2);
+        expect(result.removed.map(c => c.url)).toContain('http://a');
+        expect(result.removed.map(c => c.url)).toContain('http://b');
+        expect(result.added).toHaveLength(0);
+        expect(result.delta).toBe(-2);
+    });
+
+    // Case 4: Net cancellation — course added in entry 1, removed in entry 2 → neither in output
+    it('cancels out a course added then removed', () => {
+        const history = [
+            makeEntry([courseA], [], '2024-01-01T00:00:00Z'),
+            makeEntry([], [courseA], '2024-01-02T00:00:00Z'),
+        ];
+        const result = getAccumulatedDiff(history, 'hq');
+        expect(result.added).toHaveLength(0);
+        expect(result.removed).toHaveLength(0);
+        expect(result.delta).toBe(0);
+    });
+
+    // Case 5: Reverse cancellation — course removed in entry 1, added back in entry 2 → neither in output
+    it('cancels out a course removed then added back', () => {
+        const history = [
+            makeEntry([], [courseA], '2024-01-01T00:00:00Z'),
+            makeEntry([courseA], [], '2024-01-02T00:00:00Z'),
+        ];
+        const result = getAccumulatedDiff(history, 'hq');
+        expect(result.added).toHaveLength(0);
+        expect(result.removed).toHaveLength(0);
+        expect(result.delta).toBe(0);
+    });
+
+    // Case 6: No cancellation — different courses in each entry both appear in result
+    it('accumulates distinct added and removed courses across entries', () => {
+        const history = [
+            makeEntry([courseA], [courseB], '2024-01-01T00:00:00Z'),
+            makeEntry([courseC], [],        '2024-01-02T00:00:00Z'),
+        ];
+        const result = getAccumulatedDiff(history, 'hq');
+        expect(result.added).toHaveLength(2);
+        expect(result.added.map(c => c.url)).toContain('http://a');
+        expect(result.added.map(c => c.url)).toContain('http://c');
+        expect(result.removed).toHaveLength(1);
+        expect(result.removed[0].url).toBe('http://b');
+        expect(result.delta).toBe(1);
+    });
+
+    // Case 7: Duplicate URL deduplication — same URL added in two entries → appears only once
+    it('deduplicates the same URL added in multiple entries', () => {
+        const history = [
+            makeEntry([courseA], [], '2024-01-01T00:00:00Z'),
+            makeEntry([courseA], [], '2024-01-02T00:00:00Z'),
+        ];
+        const result = getAccumulatedDiff(history, 'hq');
+        expect(result.added).toHaveLength(1);
+        expect(result.added[0].url).toBe('http://a');
+        expect(result.delta).toBe(1);
     });
 });

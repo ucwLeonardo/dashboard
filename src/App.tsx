@@ -99,8 +99,12 @@ const App: React.FC = () => {
     const allAdded = history.flatMap(e => e[region].added);
     const allRemoved = history.flatMap(e => e[region].removed);
     // Net effect: added but not subsequently removed
-    const netAdded = allAdded.filter(a => !allRemoved.find(r => r.url === a.url));
-    const netRemoved = allRemoved.filter(r => !allAdded.find(a => a.url === r.url));
+    const netAdded = allAdded
+      .filter(a => !allRemoved.find(r => r.url === a.url))
+      .filter((a, i, arr) => arr.findIndex(x => x.url === a.url) === i);
+    const netRemoved = allRemoved
+      .filter(r => !allAdded.find(a => a.url === r.url))
+      .filter((r, i, arr) => arr.findIndex(x => x.url === r.url) === i);
     return { added: netAdded, removed: netRemoved, delta: netAdded.length - netRemoved.length };
   };
 
