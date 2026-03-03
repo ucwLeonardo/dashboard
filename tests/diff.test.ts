@@ -130,4 +130,17 @@ describe('getAccumulatedDiff', () => {
         expect(result.added[0].url).toBe('http://a');
         expect(result.delta).toBe(1);
     });
+
+    // Case 8: China region — course in china.added appears in result when region is 'china'
+    it('reads from the china region independently of hq', () => {
+        const history: ChangeEntry[] = [{
+            timestamp: '2024-01-01T00:00:00Z',
+            hq: { added: [], removed: [] },
+            china: { added: [courseA], removed: [] },
+        }];
+        const result = getAccumulatedDiff(history, 'china');
+        expect(result.added).toHaveLength(1);
+        expect(result.added[0].url).toBe('http://a');
+        expect(result.delta).toBe(1);
+    });
 });
