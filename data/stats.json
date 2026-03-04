@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-03T22:29:31.720Z",
+  "timestamp": "2026-03-04T22:31:34.829Z",
   "current": {
     "hq": {
       "sections": [
@@ -46,13 +46,8 @@
         },
         {
           "title": "Data Science",
-          "count": 11,
+          "count": 10,
           "courses": [
-            {
-              "title": "Accelerate Data Science Workflows with Zero Code Changes",
-              "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+T-DS-03+V1",
-              "price": "Free"
-            },
             {
               "title": "Exploring Adversarial Machine Learning",
               "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-DS-03+V1",
@@ -389,7 +384,7 @@
           ]
         }
       ],
-      "total": 71
+      "total": 70
     },
     "china": {
       "sections": [
@@ -2016,5 +2011,23 @@
       }
     }
   },
-  "changesHistory": []
+  "changesHistory": [
+    {
+      "timestamp": "2026-03-04T22:31:34.829Z",
+      "hq": {
+        "added": [],
+        "removed": [
+          {
+            "title": "Accelerate Data Science Workflows with Zero Code Changes",
+            "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+T-DS-03+V1",
+            "price": "Free"
+          }
+        ]
+      },
+      "china": {
+        "added": [],
+        "removed": []
+      }
+    }
+  ]
 }
