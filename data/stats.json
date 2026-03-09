@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-08T22:23:41.785Z",
+  "timestamp": "2026-03-09T22:28:54.360Z",
   "current": {
     "hq": {
       "sections": [
@@ -46,7 +46,7 @@
         },
         {
           "title": "Data Science",
-          "count": 10,
+          "count": 9,
           "courses": [
             {
               "title": "Exploring Adversarial Machine Learning",
@@ -81,11 +81,6 @@
             {
               "title": "Structure From Chaos: Accelerate GraphRAG With cuGraph and NVIDIA NIM",
               "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-DS-07+V1",
-              "price": "$30"
-            },
-            {
-              "title": "Accelerate Data Analytics on GPUs With the RAPIDS Accelerator for Apache Spark",
-              "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-DS-02+V3",
               "price": "$30"
             },
             {
@@ -384,7 +379,7 @@
           ]
         }
       ],
-      "total": 70
+      "total": 69
     },
     "china": {
       "sections": [
@@ -2046,6 +2041,23 @@
             "title": "Accelerate Data Science Workflows with Zero Code Changes",
             "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+T-DS-03+V1",
             "price": "Free"
+          }
+        ]
+      },
+      "china": {
+        "added": [],
+        "removed": []
+      }
+    },
+    {
+      "timestamp": "2026-03-09T22:28:54.360Z",
+      "hq": {
+        "added": [],
+        "removed": [
+          {
+            "title": "Accelerate Data Analytics on GPUs With the RAPIDS Accelerator for Apache Spark",
+            "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-DS-02+V3",
+            "price": "$30"
           }
         ]
       },
