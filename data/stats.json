@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-09T22:28:54.360Z",
+  "timestamp": "2026-03-10T22:28:42.969Z",
   "current": {
     "hq": {
       "sections": [
@@ -1059,7 +1059,7 @@
         },
         {
           "title": "Data Science",
-          "count": 10,
+          "count": 9,
           "courses": [
             {
               "title": "Exploring Adversarial Machine Learning",
@@ -1094,11 +1094,6 @@
             {
               "title": "Structure From Chaos: Accelerate GraphRAG With cuGraph and NVIDIA NIM",
               "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-DS-07+V1",
-              "price": "$30"
-            },
-            {
-              "title": "Accelerate Data Analytics on GPUs With the RAPIDS Accelerator for Apache Spark",
-              "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-DS-02+V3",
               "price": "$30"
             },
             {
@@ -1397,7 +1392,7 @@
           ]
         }
       ],
-      "total": 70
+      "total": 69
     },
     "china": {
       "sections": [
