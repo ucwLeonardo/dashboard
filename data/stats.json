@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-10T22:28:42.969Z",
+  "timestamp": "2026-03-11T22:27:46.425Z",
   "current": {
     "hq": {
       "sections": [
@@ -984,16 +984,16 @@
           },
           {
             "title": "迷你实战课程",
-            "count": 4,
+            "count": 7,
             "courses": [
               {
-                "title": "Accelerating Robot Learning With Isaac Lab and Newton",
-                "url": "https://www.nvidia.cn/gtc/session-catalog/sessions/gtc26-dlit81700/",
+                "title": "Faster Together: Train and Deploy a Speculative Decoding Model for Low-Latency LLM Inference",
+                "url": "https://www.nvidia.cn/gtc/session-catalog/sessions/gtc26-dlit81945/",
                 "price": "包含在培训通行证中"
               },
               {
-                "title": "Building Agentic Workflows for Financial Applications",
-                "url": "https://www.nvidia.cn/gtc/session-catalog/sessions/gtc26-dlit81814/",
+                "title": "Scalable and Resilient Training With Megatron-Bridge and NeMo",
+                "url": "https://www.nvidia.cn/gtc/session-catalog/sessions/gtc26-dlit82259/",
                 "price": "包含在培训通行证中"
               },
               {
@@ -1002,14 +1002,29 @@
                 "price": "包含在培训通行证中"
               },
               {
-                "title": "Using Reasoning VLAs to Develop Safer Autonomous Vehicles",
-                "url": "https://www.nvidia.cn/gtc/session-catalog/sessions/gtc26-dlit81597/",
+                "title": "Real-Time Simulation for Real-Time Results: How AI Physics Can Accelerate Your AI Factory",
+                "url": "https://www.nvidia.cn/gtc/session-catalog/sessions/gtc26-dlit81801/",
+                "price": "包含在培训通行证中"
+              },
+              {
+                "title": "Develop AI-Powered Operational Dashboards for Digital Twin Applications",
+                "url": "https://www.nvidia.cn/gtc/session-catalog/sessions/gtc26-dlit81650/",
+                "price": "包含在培训通行证中"
+              },
+              {
+                "title": "Automate 3D Data Pipelines With USD Exchange SDK",
+                "url": "https://www.nvidia.cn/gtc/session-catalog/sessions/gtc26-dlit81639/",
+                "price": "包含在培训通行证中"
+              },
+              {
+                "title": "Scaling Robotic AI Development from Prototype to Production",
+                "url": "https://www.nvidia.cn/gtc/session-catalog/sessions/gtc26-dlit81881/",
                 "price": "包含在培训通行证中"
               }
             ]
           }
         ],
-        "total": 13
+        "total": 16
       }
     }
   },
