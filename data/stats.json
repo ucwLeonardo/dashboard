@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-11T22:27:46.425Z",
+  "timestamp": "2026-03-12T22:25:24.600Z",
   "current": {
     "hq": {
       "sections": [
@@ -294,13 +294,8 @@
         },
         {
           "title": "Simulation and Physical AI",
-          "count": 16,
+          "count": 11,
           "courses": [
-            {
-              "title": "Develop, Customize, and Publish in Omniverse With Extensions",
-              "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-OV-02+V1",
-              "price": "Free"
-            },
             {
               "title": "An Introduction to Developing With NVIDIA Omniverse",
               "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-OV-11+V1",
@@ -322,33 +317,13 @@
               "price": "Free"
             },
             {
-              "title": "Transferring Robot Learning Policies From Simulation to Reality",
-              "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-OV-28+V1",
-              "price": "Free"
-            },
-            {
-              "title": "An Introduction to AI-Based Robot Development With Isaac ROS",
-              "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-OV-34+V1",
-              "price": "Free"
-            },
-            {
               "title": "A Beginner's Guide to Autonomous Robots",
               "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-OV-35+V1",
               "price": "Free"
             },
             {
-              "title": "An Introduction to Robot Learning and Isaac Lab",
-              "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-OV-36+V1",
-              "price": "Free"
-            },
-            {
               "title": "Generating High-Quality Motion Data for Robotics With MobilityGen",
               "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-OV-37+V1",
-              "price": "Free"
-            },
-            {
-              "title": "Develop, Simulate, and Deploy Robot Intelligence With General Robotics",
-              "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-OV-38+V1",
               "price": "Free"
             },
             {
@@ -379,7 +354,7 @@
           ]
         }
       ],
-      "total": 69
+      "total": 64
     },
     "china": {
       "sections": [
@@ -2012,16 +1987,16 @@
           },
           {
             "title": "迷你实战课程",
-            "count": 4,
+            "count": 7,
             "courses": [
               {
-                "title": "Accelerating Robot Learning With Isaac Lab and Newton",
-                "url": "https://www.nvidia.cn/gtc/session-catalog/sessions/gtc26-dlit81700/",
+                "title": "Faster Together: Train and Deploy a Speculative Decoding Model for Low-Latency LLM Inference",
+                "url": "https://www.nvidia.cn/gtc/session-catalog/sessions/gtc26-dlit81945/",
                 "price": "包含在培训通行证中"
               },
               {
-                "title": "Building Agentic Workflows for Financial Applications",
-                "url": "https://www.nvidia.cn/gtc/session-catalog/sessions/gtc26-dlit81814/",
+                "title": "Scalable and Resilient Training With Megatron-Bridge and NeMo",
+                "url": "https://www.nvidia.cn/gtc/session-catalog/sessions/gtc26-dlit82259/",
                 "price": "包含在培训通行证中"
               },
               {
@@ -2030,35 +2005,33 @@
                 "price": "包含在培训通行证中"
               },
               {
-                "title": "Using Reasoning VLAs to Develop Safer Autonomous Vehicles",
-                "url": "https://www.nvidia.cn/gtc/session-catalog/sessions/gtc26-dlit81597/",
+                "title": "Real-Time Simulation for Real-Time Results: How AI Physics Can Accelerate Your AI Factory",
+                "url": "https://www.nvidia.cn/gtc/session-catalog/sessions/gtc26-dlit81801/",
+                "price": "包含在培训通行证中"
+              },
+              {
+                "title": "Develop AI-Powered Operational Dashboards for Digital Twin Applications",
+                "url": "https://www.nvidia.cn/gtc/session-catalog/sessions/gtc26-dlit81650/",
+                "price": "包含在培训通行证中"
+              },
+              {
+                "title": "Automate 3D Data Pipelines With USD Exchange SDK",
+                "url": "https://www.nvidia.cn/gtc/session-catalog/sessions/gtc26-dlit81639/",
+                "price": "包含在培训通行证中"
+              },
+              {
+                "title": "Scaling Robotic AI Development from Prototype to Production",
+                "url": "https://www.nvidia.cn/gtc/session-catalog/sessions/gtc26-dlit81881/",
                 "price": "包含在培训通行证中"
               }
             ]
           }
         ],
-        "total": 13
+        "total": 16
       }
     }
   },
   "changesHistory": [
-    {
-      "timestamp": "2026-03-04T22:31:34.829Z",
-      "hq": {
-        "added": [],
-        "removed": [
-          {
-            "title": "Accelerate Data Science Workflows with Zero Code Changes",
-            "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+T-DS-03+V1",
-            "price": "Free"
-          }
-        ]
-      },
-      "china": {
-        "added": [],
-        "removed": []
-      }
-    },
     {
       "timestamp": "2026-03-09T22:28:54.360Z",
       "hq": {
@@ -2068,6 +2041,43 @@
             "title": "Accelerate Data Analytics on GPUs With the RAPIDS Accelerator for Apache Spark",
             "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-DS-02+V3",
             "price": "$30"
+          }
+        ]
+      },
+      "china": {
+        "added": [],
+        "removed": []
+      }
+    },
+    {
+      "timestamp": "2026-03-12T22:25:24.599Z",
+      "hq": {
+        "added": [],
+        "removed": [
+          {
+            "title": "Develop, Customize, and Publish in Omniverse With Extensions",
+            "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-OV-02+V1",
+            "price": "Free"
+          },
+          {
+            "title": "Transferring Robot Learning Policies From Simulation to Reality",
+            "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-OV-28+V1",
+            "price": "Free"
+          },
+          {
+            "title": "An Introduction to AI-Based Robot Development With Isaac ROS",
+            "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-OV-34+V1",
+            "price": "Free"
+          },
+          {
+            "title": "An Introduction to Robot Learning and Isaac Lab",
+            "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-OV-36+V1",
+            "price": "Free"
+          },
+          {
+            "title": "Develop, Simulate, and Deploy Robot Intelligence With General Robotics",
+            "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-OV-38+V1",
+            "price": "Free"
           }
         ]
       },
