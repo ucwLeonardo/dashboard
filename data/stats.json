@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-12T22:25:24.600Z",
+  "timestamp": "2026-03-13T22:28:13.884Z",
   "current": {
     "hq": {
       "sections": [
@@ -1297,13 +1297,8 @@
         },
         {
           "title": "Simulation and Physical AI",
-          "count": 16,
+          "count": 11,
           "courses": [
-            {
-              "title": "Develop, Customize, and Publish in Omniverse With Extensions",
-              "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-OV-02+V1",
-              "price": "Free"
-            },
             {
               "title": "An Introduction to Developing With NVIDIA Omniverse",
               "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-OV-11+V1",
@@ -1325,33 +1320,13 @@
               "price": "Free"
             },
             {
-              "title": "Transferring Robot Learning Policies From Simulation to Reality",
-              "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-OV-28+V1",
-              "price": "Free"
-            },
-            {
-              "title": "An Introduction to AI-Based Robot Development With Isaac ROS",
-              "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-OV-34+V1",
-              "price": "Free"
-            },
-            {
               "title": "A Beginner's Guide to Autonomous Robots",
               "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-OV-35+V1",
               "price": "Free"
             },
             {
-              "title": "An Introduction to Robot Learning and Isaac Lab",
-              "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-OV-36+V1",
-              "price": "Free"
-            },
-            {
               "title": "Generating High-Quality Motion Data for Robotics With MobilityGen",
               "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-OV-37+V1",
-              "price": "Free"
-            },
-            {
-              "title": "Develop, Simulate, and Deploy Robot Intelligence With General Robotics",
-              "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-OV-38+V1",
               "price": "Free"
             },
             {
@@ -1382,7 +1357,7 @@
           ]
         }
       ],
-      "total": 69
+      "total": 64
     },
     "china": {
       "sections": [
