@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-15T22:28:03.782Z",
+  "timestamp": "2026-03-16T22:32:40.754Z",
   "current": {
     "hq": {
       "sections": [
@@ -2007,23 +2007,6 @@
     }
   },
   "changesHistory": [
-    {
-      "timestamp": "2026-03-09T22:28:54.360Z",
-      "hq": {
-        "added": [],
-        "removed": [
-          {
-            "title": "Accelerate Data Analytics on GPUs With the RAPIDS Accelerator for Apache Spark",
-            "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-DS-02+V3",
-            "price": "$30"
-          }
-        ]
-      },
-      "china": {
-        "added": [],
-        "removed": []
-      }
-    },
     {
       "timestamp": "2026-03-12T22:25:24.599Z",
       "hq": {
