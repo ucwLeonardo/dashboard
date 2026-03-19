@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-18T22:37:49.166Z",
+  "timestamp": "2026-03-19T22:28:37.420Z",
   "current": {
     "hq": {
       "sections": [
@@ -2006,43 +2006,5 @@
       }
     }
   },
-  "changesHistory": [
-    {
-      "timestamp": "2026-03-12T22:25:24.599Z",
-      "hq": {
-        "added": [],
-        "removed": [
-          {
-            "title": "Develop, Customize, and Publish in Omniverse With Extensions",
-            "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-OV-02+V1",
-            "price": "Free"
-          },
-          {
-            "title": "Transferring Robot Learning Policies From Simulation to Reality",
-            "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-OV-28+V1",
-            "price": "Free"
-          },
-          {
-            "title": "An Introduction to AI-Based Robot Development With Isaac ROS",
-            "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-OV-34+V1",
-            "price": "Free"
-          },
-          {
-            "title": "An Introduction to Robot Learning and Isaac Lab",
-            "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-OV-36+V1",
-            "price": "Free"
-          },
-          {
-            "title": "Develop, Simulate, and Deploy Robot Intelligence With General Robotics",
-            "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-OV-38+V1",
-            "price": "Free"
-          }
-        ]
-      },
-      "china": {
-        "added": [],
-        "removed": []
-      }
-    }
-  ]
+  "changesHistory": []
 }
