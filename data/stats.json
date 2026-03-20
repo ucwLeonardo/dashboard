@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-19T22:28:37.420Z",
+  "timestamp": "2026-03-20T22:28:23.155Z",
   "current": {
     "hq": {
       "sections": [
@@ -808,101 +808,8 @@
     },
     "event": {
       "hq": {
-        "sections": [
-          {
-            "title": "Full-Day Workshops",
-            "count": 9,
-            "courses": [
-              {
-                "title": "Accelerated Networking for AI Infrastructure",
-                "url": "https://www.nvidia.com/gtc/session-catalog/sessions/gtc26-dliw82209/",
-                "price": "Paid"
-              },
-              {
-                "title": "Adding New Knowledge to Large Language Models (LLMs)",
-                "url": "https://www.nvidia.com/gtc/session-catalog/sessions/gtc26-dliw82267/",
-                "price": "Paid"
-              },
-              {
-                "title": "Building AI Agents With Multimodal Models",
-                "url": "https://www.nvidia.com/gtc/session-catalog/sessions/gtc26-dliw82269/",
-                "price": "Paid"
-              },
-              {
-                "title": "Building LLM Applications With Prompt Engineering",
-                "url": "https://www.nvidia.com/gtc/session-catalog/sessions/gtc26-dliw82270/",
-                "price": "Paid"
-              },
-              {
-                "title": "Building Observable and Scalable Multi-Agent Workflows for Asset Lifecycle Management",
-                "url": "https://www.nvidia.com/gtc/session-catalog/sessions/gtc26-dliw82268/",
-                "price": "Paid"
-              },
-              {
-                "title": "Deploying and Optimizing AI Inference at Scale",
-                "url": "https://www.nvidia.com/gtc/session-catalog/sessions/gtc26-dliw82274/",
-                "price": "Paid"
-              },
-              {
-                "title": "OpenUSD Crash Course: Build 3D Data Pipelines for Physical AI",
-                "url": "https://www.nvidia.com/gtc/session-catalog/sessions/gtc26-dliw82272/",
-                "price": "Paid"
-              },
-              {
-                "title": "How to Simulate, Train, Validate, and Deploy an End-to-End Robotics Workflow With NVIDIA Isaac",
-                "url": "https://www.nvidia.com/gtc/session-catalog/sessions/gtc26-dliw82273/",
-                "price": "Paid"
-              },
-              {
-                "title": "Fundamentals of GPU-Accelerated Workflows With CUDA Python",
-                "url": "https://www.nvidia.com/gtc/session-catalog/sessions/gtc26-dliw82265/",
-                "price": "Paid"
-              }
-            ]
-          },
-          {
-            "title": "Training Labs",
-            "count": 7,
-            "courses": [
-              {
-                "title": "Faster Together: Train and Deploy a Speculative Decoding Model for Low-Latency LLM Inference",
-                "url": "https://www.nvidia.com/gtc/session-catalog/sessions/gtc26-dlit81945/?regcode=no-ncid&ncid=no-ncid",
-                "price": "Included with Training Lab Pass"
-              },
-              {
-                "title": "Scalable and Resilient Training With Megatron-Bridge and NeMo",
-                "url": "https://www.nvidia.com/gtc/session-catalog/sessions/gtc26-dlit82259/?regcode=no-ncid&ncid=no-ncid",
-                "price": "Included with Training Lab Pass"
-              },
-              {
-                "title": "The Kaggle Grandmasters Playbook: Battle-Tested Modeling Techniques for Tabular Data",
-                "url": "https://www.nvidia.com/gtc/session-catalog/sessions/gtc26-dlit81565/?regcode=no-ncid&ncid=no-ncid",
-                "price": "Included with Training Lab Pass"
-              },
-              {
-                "title": "Real-Time Simulation for Real-Time Results: How AI Physics Can Accelerate Your AI Factory",
-                "url": "https://www.nvidia.com/gtc/session-catalog/sessions/gtc26-dlit81801/?regcode=no-ncid&ncid=no-ncid",
-                "price": "Included with Training Lab Pass"
-              },
-              {
-                "title": "Develop AI-Powered Operational Dashboards for Digital Twin Applications",
-                "url": "https://www.nvidia.com/gtc/session-catalog/sessions/gtc26-dlit81650/?regcode=no-ncid&ncid=no-ncid",
-                "price": "Included with Training Lab Pass"
-              },
-              {
-                "title": "Automate 3D Data Pipelines With USD Exchange SDK",
-                "url": "https://www.nvidia.com/gtc/session-catalog/sessions/gtc26-dlit81639/?regcode=no-ncid&ncid=no-ncid",
-                "price": "Included with Training Lab Pass"
-              },
-              {
-                "title": "Scaling Robotic AI Development from Prototype to Production",
-                "url": "https://www.nvidia.com/gtc/session-catalog/sessions/gtc26-dlit81881/?regcode=no-ncid&ncid=no-ncid",
-                "price": "Included with Training Lab Pass"
-              }
-            ]
-          }
-        ],
-        "total": 16
+        "sections": [],
+        "total": 0
       },
       "china": {
         "sections": [
