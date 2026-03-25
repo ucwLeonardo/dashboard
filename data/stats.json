@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-24T22:31:12.709Z",
+  "timestamp": "2026-03-25T22:35:31.543Z",
   "current": {
     "hq": {
       "sections": [
@@ -812,101 +812,8 @@
         "total": 0
       },
       "china": {
-        "sections": [
-          {
-            "title": "全天实战培训",
-            "count": 9,
-            "courses": [
-              {
-                "title": "AI 基础架构加速网络",
-                "url": "https://www.nvidia.cn/gtc/session-catalog/sessions/gtc26-dliw82209/",
-                "price": "付费"
-              },
-              {
-                "title": "为大语言模型添加新知识",
-                "url": "https://www.nvidia.cn/gtc/session-catalog/sessions/gtc26-dliw82267/",
-                "price": "付费"
-              },
-              {
-                "title": "使用多模态模型构建 AI 智能体",
-                "url": "https://www.nvidia.cn/gtc/session-catalog/sessions/gtc26-dliw82269/",
-                "price": "付费"
-              },
-              {
-                "title": "利用提示工程构建大语言模型 (LLM) 应用",
-                "url": "https://www.nvidia.cn/gtc/session-catalog/sessions/gtc26-dliw82270/",
-                "price": "付费"
-              },
-              {
-                "title": "构建可扩展的多智能体工作流用于资产生命周期管理",
-                "url": "https://www.nvidia.cn/gtc/session-catalog/sessions/gtc26-dliw82267/",
-                "price": "付费"
-              },
-              {
-                "title": "大规模部署与优化 AI 推理",
-                "url": "https://www.nvidia.cn/gtc/session-catalog/sessions/gtc26-dliw82274/",
-                "price": "付费"
-              },
-              {
-                "title": "OpenUSD 速成：构建用于物理 AI 的 3D 数据工作流",
-                "url": "https://www.nvidia.cn/gtc/session-catalog/sessions/gtc26-dliw82272/",
-                "price": "付费"
-              },
-              {
-                "title": "使用 NVIDIA Isaac 模拟、训练、验证和部署端到端机器人开发工作流",
-                "url": "https://www.nvidia.cn/gtc/session-catalog/sessions/gtc26-dliw82273/",
-                "price": "付费"
-              },
-              {
-                "title": "使用 CUDA Python 构建 GPU 加速工作流",
-                "url": "https://www.nvidia.cn/gtc/session-catalog/sessions/gtc26-dliw82265/",
-                "price": "付费"
-              }
-            ]
-          },
-          {
-            "title": "迷你实战课程",
-            "count": 7,
-            "courses": [
-              {
-                "title": "Faster Together: Train and Deploy a Speculative Decoding Model for Low-Latency LLM Inference",
-                "url": "https://www.nvidia.cn/gtc/session-catalog/sessions/gtc26-dlit81945/",
-                "price": "包含在培训通行证中"
-              },
-              {
-                "title": "Scalable and Resilient Training With Megatron-Bridge and NeMo",
-                "url": "https://www.nvidia.cn/gtc/session-catalog/sessions/gtc26-dlit82259/",
-                "price": "包含在培训通行证中"
-              },
-              {
-                "title": "The Kaggle Grandmasters Playbook: Battle-Tested Modeling Techniques for Tabular Data",
-                "url": "https://www.nvidia.cn/gtc/session-catalog/sessions/gtc26-dlit81565/",
-                "price": "包含在培训通行证中"
-              },
-              {
-                "title": "Real-Time Simulation for Real-Time Results: How AI Physics Can Accelerate Your AI Factory",
-                "url": "https://www.nvidia.cn/gtc/session-catalog/sessions/gtc26-dlit81801/",
-                "price": "包含在培训通行证中"
-              },
-              {
-                "title": "Develop AI-Powered Operational Dashboards for Digital Twin Applications",
-                "url": "https://www.nvidia.cn/gtc/session-catalog/sessions/gtc26-dlit81650/",
-                "price": "包含在培训通行证中"
-              },
-              {
-                "title": "Automate 3D Data Pipelines With USD Exchange SDK",
-                "url": "https://www.nvidia.cn/gtc/session-catalog/sessions/gtc26-dlit81639/",
-                "price": "包含在培训通行证中"
-              },
-              {
-                "title": "Scaling Robotic AI Development from Prototype to Production",
-                "url": "https://www.nvidia.cn/gtc/session-catalog/sessions/gtc26-dlit81881/",
-                "price": "包含在培训通行证中"
-              }
-            ]
-          }
-        ],
-        "total": 16
+        "sections": [],
+        "total": 0
       }
     }
   },
