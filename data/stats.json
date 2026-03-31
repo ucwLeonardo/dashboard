@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-30T22:35:09.987Z",
+  "timestamp": "2026-03-31T22:41:38.106Z",
   "current": {
     "hq": {
       "sections": [
@@ -1181,7 +1181,7 @@
           "courses": [
             {
               "title": "代理式 AI 入门",
-              "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-FX-39+V1",
+              "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-FX-39+V1-ZH",
               "price": "免费"
             },
             {
@@ -1210,8 +1210,8 @@
               "price": "90 美元"
             },
             {
-              "title": "开发基于提示工程的大语言模型 (LLM) 应用",
-              "url": "https://www.nvidia.cn/ai/",
+              "title": "大语言模型的评估和轻量定制",
+              "url": "https://developer.nvidia.cn/nemo-framework",
               "price": "90 美元"
             },
             {
@@ -1270,8 +1270,8 @@
               "price": "免费"
             },
             {
-              "title": "大语言模型的评估和轻量定制",
-              "url": "https://developer.nvidia.cn/nemo-framework",
+              "title": "开发基于提示工程的大语言模型 (LLM) 应用",
+              "url": "https://www.nvidia.cn/ai/",
               "price": "90 美元"
             },
             {
