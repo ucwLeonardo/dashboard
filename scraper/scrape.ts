@@ -284,113 +284,6 @@ async function scrapeChina(url = 'https://www.nvidia.cn/training/online/') {
 // Export for testing
 export { scrapeHQ, scrapeChina };
 
-// GTC Event Page Scraping Functions
-async function scrapeGTCEvent(url: string, isChina: boolean = false) {
-    const browser = await chromium.launch({ headless: true });
-    const page = await browser.newPage();
-
-    try {
-        await page.goto(url, { waitUntil: 'networkidle', timeout: 30000 });
-
-        // Wait for content to load
-        await page.waitForTimeout(3000);
-
-        const sections: SectionData[] = [];
-
-        // Extract Full-Day Workshops
-        const workshopSection: SectionData = {
-            title: isChina ? '全天实战培训' : 'Full-Day Workshops',
-            count: 0,
-            courses: []
-        };
-
-        // Find all H3 headers (workshop titles) in the Full-Day Workshops section
-        const workshopHeaders = await page.$$('h3');
-        for (const header of workshopHeaders) {
-            const title = (await header.textContent())?.trim();
-            if (!title) continue;
-
-            // Skip section headers
-            if (title.includes('Full-Day') || title.includes('全天') ||
-                title.includes('Two-Hour') || title.includes('迷你') ||
-                title.includes('Get Certified') || title.includes('认证')) {
-                continue;
-            }
-
-            // Find the "View Details" or "Learn More" link after this header
-            const url = await header.evaluate((el) => {
-                const parent = el.parentElement;
-                if (!parent) return '';
-                const link = parent.querySelector('a[href*="session-catalog"]');
-                return link?.getAttribute('href') || '';
-            });
-
-            if (url) {
-                workshopSection.courses.push({
-                    title,
-                    url: url.startsWith('http') ? url : `https://www.nvidia.com${url}`,
-                    price: isChina ? '付费' : 'Paid'
-                });
-            }
-        }
-
-        workshopSection.count = workshopSection.courses.length;
-        if (workshopSection.count > 0) {
-            sections.push(workshopSection);
-        }
-
-        // Extract Training Labs (H2 headers in the Two-Hour section)
-        const labSection: SectionData = {
-            title: isChina ? '迷你实战课程' : 'Training Labs',
-            count: 0,
-            courses: []
-        };
-
-        const labHeaders = await page.$$('h2');
-        for (const header of labHeaders) {
-            const title = (await header.textContent())?.trim();
-            if (!title) continue;
-
-            // Skip section headers and other non-lab titles
-            if (title.includes('Two-Hour') || title.includes('迷你') ||
-                title.includes('Group Pricing') || title.includes('团体') ||
-                title.includes('Get Certified') || title.includes('认证') ||
-                title.includes('Full-Day') || title.includes('全天')) {
-                continue;
-            }
-
-            // Find the "Learn More" link after this header
-            const url = await header.evaluate((el) => {
-                const parent = el.parentElement;
-                if (!parent) return '';
-                const link = parent.querySelector('a[href*="session-catalog"]');
-                return link?.getAttribute('href') || '';
-            });
-
-            if (url) {
-                labSection.courses.push({
-                    title,
-                    url: url.startsWith('http') ? url : `https://www.nvidia.com${url}`,
-                    price: isChina ? '包含在培训通行证中' : 'Included with Training Lab Pass'
-                });
-            }
-        }
-
-        labSection.count = labSection.courses.length;
-        if (labSection.count > 0) {
-            sections.push(labSection);
-        }
-
-        const total = sections.reduce((sum, s) => sum + s.count, 0);
-        console.log(`Found ${total} GTC sessions (${workshopSection.count} workshops, ${labSection.count} labs)`);
-
-        return { sections, total };
-
-    } finally {
-        await browser.close();
-    }
-}
-
 function computeDiff(current: { sections: SectionData[] }, previous: { sections: SectionData[] }): DiffResult {
     const currentCourses = current.sections.flatMap(s => s.courses);
     const previousCourses = previous.sections.flatMap(s => s.courses);
@@ -399,21 +292,9 @@ function computeDiff(current: { sections: SectionData[] }, previous: { sections:
     return { added, removed };
 }
 
-const CONFIG_FILE = path.join(process.cwd(), 'data', 'event_config.json');
-
 async function main() {
     console.log('Starting scrape...');
     const startTime = Date.now();
-
-    // Load config
-    let eventConfig = { hqUrl: '', chinaUrl: '' };
-    if (fs.existsSync(CONFIG_FILE)) {
-        try {
-            eventConfig = JSON.parse(fs.readFileSync(CONFIG_FILE, 'utf-8'));
-        } catch (e) {
-            console.log('Error reading event config');
-        }
-    }
 
     // Scrape with error handling for each source
     let hq = { sections: [], total: 0 };
@@ -433,38 +314,13 @@ async function main() {
         console.error('✗ China scrape failed:', e);
     }
 
-    // Scrape events if URLs are provided
-    let eventHQ: { sections: SectionData[], total: number } = { sections: [], total: 0 };
-    let eventChina: { sections: SectionData[], total: number } = { sections: [], total: 0 };
-
-    if (eventConfig.hqUrl) {
-        console.log(`Scraping HQ Event: ${eventConfig.hqUrl}`);
-        try {
-            eventHQ = await scrapeGTCEvent(eventConfig.hqUrl, false);
-            console.log(`✓ HQ Event scrape successful: ${eventHQ.total} sessions`);
-        } catch (e) {
-            console.error('✗ HQ Event scrape failed:', e);
-        }
-    }
-
-    if (eventConfig.chinaUrl) {
-        console.log(`Scraping China Event: ${eventConfig.chinaUrl}`);
-        try {
-            eventChina = await scrapeGTCEvent(eventConfig.chinaUrl, true);
-            console.log(`✓ China Event scrape successful: ${eventChina.total} sessions`);
-        } catch (e) {
-            console.error('✗ China Event scrape failed:', e);
-        }
-    }
-
     console.log(`Scrape completed in ${((Date.now() - startTime) / 1000).toFixed(1)}s`);
-    console.log(`HQ: ${hq.total}, China: ${china.total}, EventHQ: ${eventHQ.total}, EventChina: ${eventChina.total}`);
+    console.log(`HQ: ${hq.total}, China: ${china.total}`);
 
     // Load previous data
     let previous = {
         hq: { sections: [], total: 0 },
-        china: { sections: [], total: 0 },
-        event: { hq: { sections: [], total: 0 }, china: { sections: [], total: 0 } }
+        china: { sections: [], total: 0 }
     };
 
     let changesHistory: ChangeEntry[] = [];
@@ -472,9 +328,6 @@ async function main() {
         try {
             const existing = JSON.parse(fs.readFileSync(STATS_FILE, 'utf-8'));
             previous = existing.current || previous;
-            if (!previous.event) {
-                previous.event = { hq: { sections: [], total: 0 }, china: { sections: [], total: 0 } };
-            }
             changesHistory = existing.changesHistory || [];
         } catch (e) {
             console.error('Error reading existing stats file:', STATS_FILE, e);
@@ -506,11 +359,7 @@ async function main() {
         timestamp: new Date().toISOString(),
         current: {
             hq,
-            china,
-            event: {
-                hq: eventHQ,
-                china: eventChina
-            }
+            china
         },
         previous,
         changesHistory

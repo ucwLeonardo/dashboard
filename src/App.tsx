@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import EventMonitor from './components/EventMonitor';
 import { getCourseIdentity } from './courseIdentity';
 
 interface Course {
@@ -37,18 +36,10 @@ interface Stats {
   current: {
     hq: RegionData;
     china: RegionData;
-    event?: {
-      hq: RegionData;
-      china: RegionData;
-    };
   };
   previous?: {
     hq: RegionData;
     china: RegionData;
-    event?: {
-      hq: RegionData;
-      china: RegionData;
-    };
   };
 }
 
@@ -225,9 +216,6 @@ const App: React.FC = () => {
             <DiffList diff={chinaDiff} />
           </div>
         </main>
-
-        {/* Event Monitor */}
-        <EventMonitor eventStats={stats?.current.event} />
       </div>
     </div>
   );

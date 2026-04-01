@@ -20,25 +20,20 @@ Three-layer TypeScript monorepo: React frontend, Express backend, Playwright scr
 
 **Frontend** (`src/`) — React 18 + Vite. Single-page dashboard with no router. Renders course data from `data/stats.json` (static on GitHub Pages) or `/api/stats` (dev proxy). Components:
 - `App.tsx` — Main dashboard: fetches stats, computes diffs (added/removed courses), renders dual-region card layout with theme toggle
-- `components/EventMonitor.tsx` — Conditional event page monitor, shown only when event URLs are configured and data exists
 
-**Backend** (`server/index.ts`) — Express 5 on port 3001. Three endpoints:
+**Backend** (`server/index.ts`) — Express 5 on port 3001. One endpoint:
 - `GET /api/stats` — serves `data/stats.json`
-- `GET /api/config` — serves `data/event_config.json`
-- `POST /api/config` — updates event config and triggers immediate scrape
 
 Has a node-cron job (daily 00:00 Asia/Shanghai) that runs the scraper.
 
-**Scraper** (`scraper/scrape.ts`) — Playwright headless Chromium. Three exported functions:
+**Scraper** (`scraper/scrape.ts`) — Playwright headless Chromium. Two exported functions:
 - `scrapeHQ(url?)` — scrapes global DLI self-paced courses page (tab navigation, "Show More" expansion, cookie banner dismissal)
 - `scrapeChina(url?)` — scrapes China DLI courses page (tab-based, Chinese price parsing)
-- `scrapeGTCEvent(url, isChina?)` — scrapes event training pages
 
 The `main()` function orchestrates all scraping, preserves previous data for diff comparison, and writes to `data/stats.json`.
 
 **Data** (`data/`) — JSON file-based storage, no database:
 - `stats.json` — current + previous scrape snapshots with timestamp
-- `event_config.json` — configurable event page URLs
 
 ## Data Flow
 
@@ -51,7 +46,6 @@ In development: Vite proxies `/api/*` to Express backend on port 3001.
 - `scrape.yml` — Daily scrape + commit (skips bot commits to prevent loops)
 - `deploy.yml` — Build + deploy to GitHub Pages (copies data/ to dist/data/)
 - `test.yml` — Runs `npm test` on push/PR
-- `configure-event.yml` — Manual dispatch to update event_config.json
 
 ## Key Conventions
 
