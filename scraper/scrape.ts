@@ -67,9 +67,9 @@ async function scrapeHQ(url = 'https://www.nvidia.com/en-us/training/self-paced-
             const tabTitle = (await tab.textContent())?.trim() || 'Unknown';
             if (tabTitle.includes('Infrastructure') || tabTitle === 'Unknown') continue;
 
-            // Click tab to activate
-            await tab.click();
-            await page.waitForTimeout(1000); // Wait for tab switch
+            // Click tab to activate (force: true to bypass cookie overlay)
+            await tab.click({ force: true });
+            await page.waitForTimeout(1500); // Wait for tab switch and card loading
 
             // Click "Show More" buttons for the *active* tab
             // Target specific text to avoid clicking "Reset" or other buttons
