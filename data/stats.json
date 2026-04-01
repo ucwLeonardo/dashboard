@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-31T22:41:38.106Z",
+  "timestamp": "2026-04-01T03:15:59.492Z",
   "current": {
     "hq": {
       "sections": [
@@ -46,7 +46,7 @@
         },
         {
           "title": "Data Science",
-          "count": 9,
+          "count": 10,
           "courses": [
             {
               "title": "Exploring Adversarial Machine Learning",
@@ -91,6 +91,11 @@
             {
               "title": "Accelerating Portfolio Optimization",
               "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-DS-09+V1",
+              "price": "$30"
+            },
+            {
+              "title": "Accelerated Machine Learning for Time Series Forecasting",
+              "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-DS-10+V1",
               "price": "$30"
             }
           ]
@@ -354,7 +359,7 @@
           ]
         }
       ],
-      "total": 64
+      "total": 65
     },
     "china": {
       "sections": [
@@ -1656,6 +1661,23 @@
             "price": "免费"
           }
         ]
+      }
+    },
+    {
+      "timestamp": "2026-04-01T03:15:59.492Z",
+      "hq": {
+        "added": [
+          {
+            "title": "Accelerated Machine Learning for Time Series Forecasting",
+            "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-DS-10+V1",
+            "price": "$30"
+          }
+        ],
+        "removed": []
+      },
+      "china": {
+        "added": [],
+        "removed": []
       }
     }
   ]
