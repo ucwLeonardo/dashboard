@@ -1,5 +1,6 @@
 
 import { describe, it, expect } from 'vitest';
+import { getCourseIdentity } from '../src/courseIdentity.ts';
 
 interface Course {
     title: string;
@@ -24,11 +25,11 @@ const getAccumulatedDiff = (history: ChangeEntry[] | undefined, region: 'hq' | '
     const allAdded = history.flatMap(e => e[region].added);
     const allRemoved = history.flatMap(e => e[region].removed);
     const netAdded = allAdded
-        .filter(a => !allRemoved.find(r => r.url === a.url))
-        .filter((a, i, arr) => arr.findIndex(x => x.url === a.url) === i);
+        .filter(a => !allRemoved.find(r => getCourseIdentity(r) === getCourseIdentity(a)))
+        .filter((a, i, arr) => arr.findIndex(x => getCourseIdentity(x) === getCourseIdentity(a)) === i);
     const netRemoved = allRemoved
-        .filter(r => !allAdded.find(a => a.url === r.url))
-        .filter((r, i, arr) => arr.findIndex(x => x.url === r.url) === i);
+        .filter(r => !allAdded.find(a => getCourseIdentity(a) === getCourseIdentity(r)))
+        .filter((r, i, arr) => arr.findIndex(x => getCourseIdentity(x) === getCourseIdentity(r)) === i);
     return { added: netAdded, removed: netRemoved, delta: netAdded.length - netRemoved.length };
 };
 
@@ -142,5 +143,27 @@ describe('getAccumulatedDiff', () => {
         expect(result.added).toHaveLength(1);
         expect(result.added[0].url).toBe('http://a');
         expect(result.delta).toBe(1);
+    });
+
+    it('treats localized course URLs as the same course identity', () => {
+        const localized = {
+            title: '代理式 AI 入门',
+            url: 'https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-FX-39+V1-ZH',
+            price: '免费',
+        };
+        const canonical = {
+            title: '代理式 AI 入门',
+            url: 'https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-FX-39+V1',
+            price: '免费',
+        };
+
+        const history = [
+            makeEntry([], [canonical], '2024-01-01T00:00:00Z'),
+            makeEntry([localized], [], '2024-01-02T00:00:00Z'),
+        ];
+        const result = getAccumulatedDiff(history, 'hq');
+
+        expect(getCourseIdentity(localized)).toBe(getCourseIdentity(canonical));
+        expect(result).toEqual({ added: [], removed: [], delta: 0 });
     });
 });

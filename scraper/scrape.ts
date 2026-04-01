@@ -1,6 +1,7 @@
 import { chromium } from 'playwright';
 import fs from 'fs';
 import path from 'path';
+import { getCourseIdentity } from '../src/courseIdentity.ts';
 
 const STATS_FILE = path.join(process.cwd(), 'data', 'stats.json');
 
@@ -393,8 +394,8 @@ async function scrapeGTCEvent(url: string, isChina: boolean = false) {
 function computeDiff(current: { sections: SectionData[] }, previous: { sections: SectionData[] }): DiffResult {
     const currentCourses = current.sections.flatMap(s => s.courses);
     const previousCourses = previous.sections.flatMap(s => s.courses);
-    const added = currentCourses.filter(c => !previousCourses.find(p => p.url === c.url));
-    const removed = previousCourses.filter(p => !currentCourses.find(c => p.url === c.url));
+    const added = currentCourses.filter(c => !previousCourses.find(p => getCourseIdentity(p) === getCourseIdentity(c)));
+    const removed = previousCourses.filter(p => !currentCourses.find(c => getCourseIdentity(c) === getCourseIdentity(p)));
     return { added, removed };
 }
 

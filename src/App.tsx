@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import EventMonitor from './components/EventMonitor';
+import { getCourseIdentity } from './courseIdentity';
 
 interface Course {
   title: string;
@@ -100,11 +101,11 @@ const App: React.FC = () => {
     const allRemoved = history.flatMap(e => e[region].removed);
     // Net effect: added but not subsequently removed
     const netAdded = allAdded
-      .filter(a => !allRemoved.find(r => r.url === a.url))
-      .filter((a, i, arr) => arr.findIndex(x => x.url === a.url) === i);
+      .filter(a => !allRemoved.find(r => getCourseIdentity(r) === getCourseIdentity(a)))
+      .filter((a, i, arr) => arr.findIndex(x => getCourseIdentity(x) === getCourseIdentity(a)) === i);
     const netRemoved = allRemoved
-      .filter(r => !allAdded.find(a => a.url === r.url))
-      .filter((r, i, arr) => arr.findIndex(x => x.url === r.url) === i);
+      .filter(r => !allAdded.find(a => getCourseIdentity(a) === getCourseIdentity(r)))
+      .filter((r, i, arr) => arr.findIndex(x => getCourseIdentity(x) === getCourseIdentity(r)) === i);
     return { added: netAdded, removed: netRemoved, delta: netAdded.length - netRemoved.length };
   };
 
