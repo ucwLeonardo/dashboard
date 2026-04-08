@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-07T22:37:57.149Z",
+  "timestamp": "2026-04-08T22:38:28.958Z",
   "current": {
     "hq": {
       "sections": [
@@ -1624,23 +1624,5 @@
       "total": 83
     }
   },
-  "changesHistory": [
-    {
-      "timestamp": "2026-04-01T03:15:59.492Z",
-      "hq": {
-        "added": [
-          {
-            "title": "Accelerated Machine Learning for Time Series Forecasting",
-            "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-DS-10+V1",
-            "price": "$30"
-          }
-        ],
-        "removed": []
-      },
-      "china": {
-        "added": [],
-        "removed": []
-      }
-    }
-  ]
+  "changesHistory": []
 }
