@@ -38,11 +38,12 @@ jobs:
       - name: Build
         run: npm run build
         
-      # Copy stats.json to dist/data/stats.json so it can be fetched relative to the page
+      # Copy data files to dist/data/ so they can be fetched relative to the page
       - name: Copy Data
         run: |
           mkdir -p dist/data
           cp data/stats.json dist/data/stats.json
+          if [ -f data/certifications.json ]; then cp data/certifications.json dist/data/certifications.json; fi
           
       - name: Setup Pages
         uses: actions/configure-pages@v5

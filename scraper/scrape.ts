@@ -2,8 +2,11 @@ import { chromium } from 'playwright';
 import fs from 'fs';
 import path from 'path';
 import { getCourseIdentity } from '../src/courseIdentity.ts';
+import { getCertIdentity } from '../src/certIdentity.ts';
+import { scrapeCertifications, Certification, CertSection } from './scrapeCertifications.ts';
 
 const STATS_FILE = path.join(process.cwd(), 'data', 'stats.json');
+const CERT_FILE = path.join(process.cwd(), 'data', 'certifications.json');
 
 interface Course {
     title: string;
@@ -281,8 +284,55 @@ async function scrapeChina(url = 'https://www.nvidia.cn/training/online/') {
     }
 }
 
+interface CertChange {
+    cert: Certification;
+    changes: string;
+}
+
+interface CertDiffResult {
+    added: Certification[];
+    removed: Certification[];
+    changed: CertChange[];
+}
+
+interface CertChangeEntry {
+    timestamp: string;
+    diff: CertDiffResult;
+}
+
 // Export for testing
 export { scrapeHQ, scrapeChina };
+
+function computeCertDiff(
+    current: { sections: CertSection[] },
+    previous: { sections: CertSection[] }
+): CertDiffResult {
+    const currentCerts = current.sections.flatMap(s => s.certifications);
+    const previousCerts = previous.sections.flatMap(s => s.certifications);
+
+    const added = currentCerts.filter(
+        c => !previousCerts.find(p => getCertIdentity(p) === getCertIdentity(c))
+    );
+    const removed = previousCerts.filter(
+        p => !currentCerts.find(c => getCertIdentity(c) === getCertIdentity(p))
+    );
+
+    // Detect changes (same cert code, different price/duration/description)
+    const changed: CertChange[] = [];
+    for (const curr of currentCerts) {
+        const prev = previousCerts.find(p => getCertIdentity(p) === getCertIdentity(curr));
+        if (!prev) continue;
+        const diffs: string[] = [];
+        if (prev.price !== curr.price) diffs.push(`价格: ${prev.price} → ${curr.price}`);
+        if (prev.duration !== curr.duration) diffs.push(`时长: ${prev.duration} → ${curr.duration}`);
+        if (prev.description !== curr.description) diffs.push('描述已更新');
+        if (diffs.length > 0) {
+            changed.push({ cert: curr, changes: diffs.join('; ') });
+        }
+    }
+
+    return { added, removed, changed };
+}
 
 function computeDiff(current: { sections: SectionData[] }, previous: { sections: SectionData[] }): DiffResult {
     const currentCourses = current.sections.flatMap(s => s.courses);
@@ -297,8 +347,10 @@ async function main() {
     const startTime = Date.now();
 
     // Scrape with error handling for each source
-    let hq = { sections: [], total: 0 };
-    let china = { sections: [], total: 0 };
+    let hq = { sections: [] as SectionData[], total: 0 };
+    let china = { sections: [] as SectionData[], total: 0 };
+    let certs = { sections: [] as CertSection[], total: 0 };
+    let certScrapeFailed = false;
 
     try {
         hq = await scrapeHQ();
@@ -314,13 +366,21 @@ async function main() {
         console.error('✗ China scrape failed:', e);
     }
 
-    console.log(`Scrape completed in ${((Date.now() - startTime) / 1000).toFixed(1)}s`);
-    console.log(`HQ: ${hq.total}, China: ${china.total}`);
+    try {
+        certs = await scrapeCertifications();
+        console.log(`✓ Certifications scrape successful: ${certs.total} certifications`);
+    } catch (e) {
+        certScrapeFailed = true;
+        console.error('✗ Certifications scrape failed:', e);
+    }
 
-    // Load previous data
+    console.log(`Scrape completed in ${((Date.now() - startTime) / 1000).toFixed(1)}s`);
+    console.log(`HQ: ${hq.total}, China: ${china.total}, Certs: ${certs.total}`);
+
+    // --- Course stats ---
     let previous = {
-        hq: { sections: [], total: 0 },
-        china: { sections: [], total: 0 }
+        hq: { sections: [] as SectionData[], total: 0 },
+        china: { sections: [] as SectionData[], total: 0 }
     };
 
     let changesHistory: ChangeEntry[] = [];
@@ -354,7 +414,7 @@ async function main() {
     const cutoff = Date.now() - 7 * 24 * 60 * 60 * 1000;
     changesHistory = changesHistory.filter(e => new Date(e.timestamp).getTime() > cutoff);
 
-    // Save new data - ALWAYS update timestamp
+    // Save course stats
     const data = {
         timestamp: new Date().toISOString(),
         current: {
@@ -368,6 +428,50 @@ async function main() {
     fs.mkdirSync(path.dirname(STATS_FILE), { recursive: true });
     fs.writeFileSync(STATS_FILE, JSON.stringify(data, null, 2));
     console.log('✓ Stats saved to', STATS_FILE);
+
+    // --- Certification stats ---
+    let certPrevious = { sections: [] as CertSection[], total: 0 };
+    let certChangesHistory: CertChangeEntry[] = [];
+
+    if (fs.existsSync(CERT_FILE)) {
+        try {
+            const existing = JSON.parse(fs.readFileSync(CERT_FILE, 'utf-8'));
+            certPrevious = existing.current || certPrevious;
+            certChangesHistory = existing.changesHistory || [];
+        } catch (e) {
+            console.error('Error reading existing cert file:', CERT_FILE, e);
+        }
+    }
+
+    // Use explicit failure flag — not count-based inference
+    // certScrapeFailed = true means the scrape threw an error (network, timeout, etc.)
+    // A successful scrape returning 0 is a legitimate state change
+    const certCurrent = certScrapeFailed ? certPrevious : certs;
+
+    if (!certScrapeFailed) {
+        const certDiff = computeCertDiff(certs, certPrevious);
+        if (certDiff.added.length > 0 || certDiff.removed.length > 0 || certDiff.changed.length > 0) {
+            certChangesHistory.push({
+                timestamp: new Date().toISOString(),
+                diff: certDiff
+            });
+        }
+    } else {
+        console.log('⚠ Cert scrape failed — preserving previous data');
+    }
+
+    certChangesHistory = certChangesHistory.filter(e => new Date(e.timestamp).getTime() > cutoff);
+
+    // Always write: updates timestamp and prunes stale history even on failure
+    const certData = {
+        timestamp: new Date().toISOString(),
+        current: certCurrent,
+        previous: certPrevious,
+        changesHistory: certChangesHistory
+    };
+
+    fs.writeFileSync(CERT_FILE, JSON.stringify(certData, null, 2));
+    console.log('✓ Certifications saved to', CERT_FILE);
     console.log('✓ Timestamp updated to:', data.timestamp);
 }
 

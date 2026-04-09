@@ -8,6 +8,7 @@ import { exec } from 'child_process';
 const app = express();
 const PORT = 3001; // Keep backend on 3001
 const STATS_FILE = path.join(process.cwd(), 'data', 'stats.json');
+const CERT_FILE = path.join(process.cwd(), 'data', 'certifications.json');
 
 app.use(cors());
 app.use(express.json());
@@ -18,6 +19,15 @@ app.get('/api/stats', (req, res) => {
         res.json(JSON.parse(data));
     } else {
         res.status(404).json({ error: 'Stats not found' });
+    }
+});
+
+app.get('/api/certifications', (req, res) => {
+    if (fs.existsSync(CERT_FILE)) {
+        const data = fs.readFileSync(CERT_FILE, 'utf-8');
+        res.json(JSON.parse(data));
+    } else {
+        res.status(404).json({ error: 'Certifications not found' });
     }
 });
 

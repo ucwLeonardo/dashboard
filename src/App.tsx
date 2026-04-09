@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import { getCourseIdentity } from './courseIdentity';
+import { getCertIdentity } from './certIdentity';
 
 interface Course {
   title: string;
@@ -43,8 +44,58 @@ interface Stats {
   };
 }
 
+// Certification types
+interface Certification {
+  title: string;
+  level: string;
+  description: string;
+  price: string;
+  duration: string;
+  code: string;
+  url: string;
+}
+
+interface CertSection {
+  title: string;
+  count: number;
+  certifications: Certification[];
+}
+
+interface CertChange {
+  cert: Certification;
+  changes: string;
+}
+
+interface CertDiffResult {
+  added: Certification[];
+  removed: Certification[];
+  changed: CertChange[];
+}
+
+interface CertChangeEntry {
+  timestamp: string;
+  diff: CertDiffResult;
+}
+
+interface CertStats {
+  timestamp: string;
+  current: {
+    sections: CertSection[];
+    total: number;
+  };
+  changesHistory?: CertChangeEntry[];
+}
+
+const certSectionsOrder = [
+  'AI Infrastructure',
+  'Data Science',
+  'Generative AI',
+  'Simulation and Physical AI',
+];
+
 const App: React.FC = () => {
   const [stats, setStats] = useState<Stats | null>(null);
+  const [certStats, setCertStats] = useState<CertStats | null>(null);
   const [loading, setLoading] = useState(true);
   const [theme, setTheme] = useState<'dark' | 'light'>(() => {
     return (localStorage.getItem('theme') as 'dark' | 'light') || 'light';
@@ -100,15 +151,36 @@ const App: React.FC = () => {
     return { added: netAdded, removed: netRemoved, delta: netAdded.length - netRemoved.length };
   };
 
+  const getAccumulatedCertDiff = (history: CertChangeEntry[] | undefined) => {
+    if (!history || history.length === 0) return { added: [], removed: [], changed: [], delta: 0 };
+    const allAdded = history.flatMap(e => e.diff.added);
+    const allRemoved = history.flatMap(e => e.diff.removed);
+    const allChanged = history.flatMap(e => e.diff.changed);
+    const netAdded = allAdded
+      .filter(a => !allRemoved.find(r => getCertIdentity(r) === getCertIdentity(a)))
+      .filter((a, i, arr) => arr.findIndex(x => getCertIdentity(x) === getCertIdentity(a)) === i);
+    const netRemoved = allRemoved
+      .filter(r => !allAdded.find(a => getCertIdentity(a) === getCertIdentity(r)))
+      .filter((r, i, arr) => arr.findIndex(x => getCertIdentity(x) === getCertIdentity(r)) === i);
+    // Keep latest change per cert
+    const latestChanged = allChanged
+      .filter((c, i, arr) => arr.findIndex(x => getCertIdentity(x.cert) === getCertIdentity(c.cert)) === i);
+    return { added: netAdded, removed: netRemoved, changed: latestChanged, delta: netAdded.length - netRemoved.length };
+  };
+
   useEffect(() => {
     // In production (GitHub Pages), fetch the static JSON file.
     // In development, use the API proxy.
-    const url = import.meta.env.PROD ? './data/stats.json' : '/api/stats';
+    const statsUrl = import.meta.env.PROD ? './data/stats.json' : '/api/stats';
+    const certUrl = import.meta.env.PROD ? './data/certifications.json' : '/api/certifications';
 
-    fetch(url)
-      .then(res => res.json())
-      .then(data => {
-        setStats(data);
+    Promise.all([
+      fetch(statsUrl).then(res => res.json()),
+      fetch(certUrl).then(res => res.json()).catch(() => null),
+    ])
+      .then(([statsData, certData]) => {
+        setStats(statsData);
+        if (certData?.current?.sections) setCertStats(certData);
         setLoading(false);
       })
       .catch(err => {
@@ -121,6 +193,7 @@ const App: React.FC = () => {
 
   const hqDiff = getAccumulatedDiff(stats?.changesHistory, 'hq');
   const chinaDiff = getAccumulatedDiff(stats?.changesHistory, 'china');
+  const certDiff = getAccumulatedCertDiff(certStats?.changesHistory);
 
   return (
     <div className="container">
@@ -216,6 +289,42 @@ const App: React.FC = () => {
             <DiffList diff={chinaDiff} />
           </div>
         </main>
+
+        {/* Certifications Section */}
+        {certStats && (
+          <section className="cert-section">
+            <h2 className="section-heading">Certifications</h2>
+            <div className="cards-container">
+              <div className="card-wrapper cert-card-wrapper">
+                <a href="https://www.nvidia.com/en-us/learn/certification/" target="_blank" rel="noreferrer" className="card-link">
+                  <div className="section-card">
+                    <h2>Certification</h2>
+                    <div className="total-container">
+                      <div className="total-count">{certStats.current.total}</div>
+                      {certDiff.delta !== 0 && (
+                        <div className={`delta ${certDiff.delta > 0 ? 'plus' : 'minus'}`}>
+                          {certDiff.delta > 0 ? `+${certDiff.delta}` : certDiff.delta}
+                        </div>
+                      )}
+                    </div>
+                    <div className="sub-sections">
+                      {certSectionsOrder.map((name, i) => {
+                        const section = certStats.current.sections.find(s => s.title === name);
+                        return (
+                          <div key={i} className="stat-item">
+                            <span className="label">{name}</span>
+                            <span className="value">{section?.count ?? 0}</span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </a>
+                <CertDiffList diff={certDiff} />
+              </div>
+            </div>
+          </section>
+        )}
       </div>
     </div>
   );
@@ -244,6 +353,59 @@ const DiffList: React.FC<{ diff: { added: Course[], removed: Course[] } }> = ({ 
             <div key={i} className="diff-item">
               <span className="title">{c.title}</span>
               <span className="price">{c.price}</span>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
+const CertDiffList: React.FC<{
+  diff: { added: Certification[], removed: Certification[], changed: CertChange[] }
+}> = ({ diff }) => {
+  if (diff.added.length === 0 && diff.removed.length === 0 && diff.changed.length === 0) return null;
+
+  return (
+    <div className="diff-list">
+      {diff.added.length > 0 && (
+        <div className="diff-group added">
+          <h3>新增认证</h3>
+          {diff.added.map((c, i) => (
+            <div key={i} className="diff-item">
+              <a href={c.url} target="_blank" rel="noreferrer">
+                {c.title}
+                {c.level && <span className="cert-level">{c.level}</span>}
+              </a>
+              <span className="price">{c.price}</span>
+            </div>
+          ))}
+        </div>
+      )}
+      {diff.removed.length > 0 && (
+        <div className="diff-group removed">
+          <h3>移除认证</h3>
+          {diff.removed.map((c, i) => (
+            <div key={i} className="diff-item">
+              <span className="title">
+                {c.title}
+                {c.level && <span className="cert-level">{c.level}</span>}
+              </span>
+              <span className="price">{c.price}</span>
+            </div>
+          ))}
+        </div>
+      )}
+      {diff.changed.length > 0 && (
+        <div className="diff-group changed">
+          <h3>变更认证</h3>
+          {diff.changed.map((c, i) => (
+            <div key={i} className="diff-item">
+              <a href={c.cert.url} target="_blank" rel="noreferrer">
+                {c.cert.title}
+                {c.cert.level && <span className="cert-level">{c.cert.level}</span>}
+              </a>
+              <span className="change-detail">{c.changes}</span>
             </div>
           ))}
         </div>

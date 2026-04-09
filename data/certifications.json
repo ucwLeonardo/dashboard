@@ -1,0 +1,245 @@
+{
+  "timestamp": "2026-04-09T09:16:10.458Z",
+  "current": {
+    "sections": [
+      {
+        "title": "AI Infrastructure",
+        "count": 4,
+        "certifications": [
+          {
+            "title": "AI Infrastructure",
+            "level": "Professional",
+            "description": "Verify the ability to deploy, configure, and validate advanced NVIDIA AI infrastructure.",
+            "price": "$400",
+            "duration": "2 hours",
+            "code": "NCP-AII",
+            "url": "https://www.nvidia.com/en-us/learn/certification/ai-infrastructure-professional/"
+          },
+          {
+            "title": "AI Operations",
+            "level": "Professional",
+            "description": "Demonstrate the skills needed to monitor, troubleshoot, and optimize NVIDIA AI infrastructure.",
+            "price": "$400",
+            "duration": "2 hours",
+            "code": "NCP-AIO",
+            "url": "https://www.nvidia.com/en-us/learn/certification/ai-operations-professional/"
+          },
+          {
+            "title": "AI Networking",
+            "level": "Professional",
+            "description": "Showcase the ability to deploy and configure environments that leverage NVIDIA’s advanced networking technologies.",
+            "price": "$400",
+            "duration": "2 hours",
+            "code": "NCP-AIN",
+            "url": "https://www.nvidia.com/en-us/learn/certification/ai-networking-professional/"
+          },
+          {
+            "title": "AI Infrastructure and Operations",
+            "level": "Associate",
+            "description": "Validate a candidate’s knowledge of foundational concepts of AI computing related to infrastructure and operations.",
+            "price": "$125",
+            "duration": "1 hour",
+            "code": "NCA-AIIO",
+            "url": "https://www.nvidia.com/en-us/learn/certification/ai-infrastructure-operations-associate/"
+          }
+        ]
+      },
+      {
+        "title": "Data Science",
+        "count": 2,
+        "certifications": [
+          {
+            "title": "Accelerated Data Science",
+            "level": "Professional",
+            "description": "Demonstrate proficiency in leveraging GPU-accelerated tools and libraries for data science workflows.",
+            "price": "$200",
+            "duration": "2 hours",
+            "code": "NCP-ADS",
+            "url": "https://www.nvidia.com/en-us/learn/certification/accelerated-data-science-professional/"
+          },
+          {
+            "title": "Accelerated Data Science",
+            "level": "Associate",
+            "description": "Verify a candidate’s understanding of GPU-accelerated data science concepts for preparing data, developing models, and managing end-to-end workflows.",
+            "price": "$125",
+            "duration": "1 hour",
+            "code": "NCA-ADS",
+            "url": "https://www.nvidia.com/en-us/learn/certification/accelerated-data-science-associate/"
+          }
+        ]
+      },
+      {
+        "title": "Generative AI",
+        "count": 4,
+        "certifications": [
+          {
+            "title": "Generative AI LLMs",
+            "level": "Professional",
+            "description": "Certify the ability to design, train, and optimize LLMs, leveraging advanced distributed training and fine-tuning strategies to deliver high-performance AI solutions.",
+            "price": "$200",
+            "duration": "2 hours",
+            "code": "NCP-GENL",
+            "url": "https://www.nvidia.com/en-us/learn/certification/generative-ai-llm-professional/"
+          },
+          {
+            "title": "Agentic AI",
+            "level": "Professional",
+            "description": "Demonstrate the ability to build and govern advanced agentic AI solutions with multi-agent interaction, scalability, and ethical safeguards.",
+            "price": "$200",
+            "duration": "2 hours",
+            "code": "NCP-AAI",
+            "url": "https://www.nvidia.com/en-us/learn/certification/agentic-ai-professional/"
+          },
+          {
+            "title": "Generative AI LLM",
+            "level": "Associate",
+            "description": "Verify foundational knowledge for developing, integrating, and maintaining AI-driven applications using generative AI and LLMs with NVIDIA solutions.",
+            "price": "$125",
+            "duration": "1 hour",
+            "code": "NCA-GENL",
+            "url": "https://www.nvidia.com/en-us/learn/certification/generative-ai-llm-associate/"
+          },
+          {
+            "title": "Generative AI Multimodal",
+            "level": "Associate",
+            "description": "Validates the foundational skills needed to design, implement, and manage AI systems that synthesize and interpret data across text, image, and audio modalities.",
+            "price": "$125",
+            "duration": "1 hour",
+            "code": "NCA-GENM",
+            "url": "https://www.nvidia.com/en-us/learn/certification/generative-ai-multimodal-associate/"
+          }
+        ]
+      },
+      {
+        "title": "Simulation and Physical AI",
+        "count": 1,
+        "certifications": [
+          {
+            "title": "OpenUSD Development",
+            "level": "Professional",
+            "description": "Verify a candidate’s ability to build, maintain, and optimize 3D content creation pipelines using OpenUSD.",
+            "price": "$200",
+            "duration": "2 hours",
+            "code": "NCP-OUSD",
+            "url": "https://www.nvidia.com/en-us/learn/certification/openusd-development-professional/"
+          }
+        ]
+      }
+    ],
+    "total": 11
+  },
+  "previous": {
+    "sections": [],
+    "total": 0
+  },
+  "changesHistory": [
+    {
+      "timestamp": "2026-04-09T09:16:10.458Z",
+      "diff": {
+        "added": [
+          {
+            "title": "AI Infrastructure",
+            "level": "Professional",
+            "description": "Verify the ability to deploy, configure, and validate advanced NVIDIA AI infrastructure.",
+            "price": "$400",
+            "duration": "2 hours",
+            "code": "NCP-AII",
+            "url": "https://www.nvidia.com/en-us/learn/certification/ai-infrastructure-professional/"
+          },
+          {
+            "title": "AI Operations",
+            "level": "Professional",
+            "description": "Demonstrate the skills needed to monitor, troubleshoot, and optimize NVIDIA AI infrastructure.",
+            "price": "$400",
+            "duration": "2 hours",
+            "code": "NCP-AIO",
+            "url": "https://www.nvidia.com/en-us/learn/certification/ai-operations-professional/"
+          },
+          {
+            "title": "AI Networking",
+            "level": "Professional",
+            "description": "Showcase the ability to deploy and configure environments that leverage NVIDIA’s advanced networking technologies.",
+            "price": "$400",
+            "duration": "2 hours",
+            "code": "NCP-AIN",
+            "url": "https://www.nvidia.com/en-us/learn/certification/ai-networking-professional/"
+          },
+          {
+            "title": "AI Infrastructure and Operations",
+            "level": "Associate",
+            "description": "Validate a candidate’s knowledge of foundational concepts of AI computing related to infrastructure and operations.",
+            "price": "$125",
+            "duration": "1 hour",
+            "code": "NCA-AIIO",
+            "url": "https://www.nvidia.com/en-us/learn/certification/ai-infrastructure-operations-associate/"
+          },
+          {
+            "title": "Accelerated Data Science",
+            "level": "Professional",
+            "description": "Demonstrate proficiency in leveraging GPU-accelerated tools and libraries for data science workflows.",
+            "price": "$200",
+            "duration": "2 hours",
+            "code": "NCP-ADS",
+            "url": "https://www.nvidia.com/en-us/learn/certification/accelerated-data-science-professional/"
+          },
+          {
+            "title": "Accelerated Data Science",
+            "level": "Associate",
+            "description": "Verify a candidate’s understanding of GPU-accelerated data science concepts for preparing data, developing models, and managing end-to-end workflows.",
+            "price": "$125",
+            "duration": "1 hour",
+            "code": "NCA-ADS",
+            "url": "https://www.nvidia.com/en-us/learn/certification/accelerated-data-science-associate/"
+          },
+          {
+            "title": "Generative AI LLMs",
+            "level": "Professional",
+            "description": "Certify the ability to design, train, and optimize LLMs, leveraging advanced distributed training and fine-tuning strategies to deliver high-performance AI solutions.",
+            "price": "$200",
+            "duration": "2 hours",
+            "code": "NCP-GENL",
+            "url": "https://www.nvidia.com/en-us/learn/certification/generative-ai-llm-professional/"
+          },
+          {
+            "title": "Agentic AI",
+            "level": "Professional",
+            "description": "Demonstrate the ability to build and govern advanced agentic AI solutions with multi-agent interaction, scalability, and ethical safeguards.",
+            "price": "$200",
+            "duration": "2 hours",
+            "code": "NCP-AAI",
+            "url": "https://www.nvidia.com/en-us/learn/certification/agentic-ai-professional/"
+          },
+          {
+            "title": "Generative AI LLM",
+            "level": "Associate",
+            "description": "Verify foundational knowledge for developing, integrating, and maintaining AI-driven applications using generative AI and LLMs with NVIDIA solutions.",
+            "price": "$125",
+            "duration": "1 hour",
+            "code": "NCA-GENL",
+            "url": "https://www.nvidia.com/en-us/learn/certification/generative-ai-llm-associate/"
+          },
+          {
+            "title": "Generative AI Multimodal",
+            "level": "Associate",
+            "description": "Validates the foundational skills needed to design, implement, and manage AI systems that synthesize and interpret data across text, image, and audio modalities.",
+            "price": "$125",
+            "duration": "1 hour",
+            "code": "NCA-GENM",
+            "url": "https://www.nvidia.com/en-us/learn/certification/generative-ai-multimodal-associate/"
+          },
+          {
+            "title": "OpenUSD Development",
+            "level": "Professional",
+            "description": "Verify a candidate’s ability to build, maintain, and optimize 3D content creation pipelines using OpenUSD.",
+            "price": "$200",
+            "duration": "2 hours",
+            "code": "NCP-OUSD",
+            "url": "https://www.nvidia.com/en-us/learn/certification/openusd-development-professional/"
+          }
+        ],
+        "removed": [],
+        "changed": []
+      }
+    }
+  ]
+}

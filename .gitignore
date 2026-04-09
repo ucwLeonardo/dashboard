@@ -24,3 +24,17 @@ dist-ssr
 *.sw?
 .playwright-mcp/
 .serena/
+.claude/
+.mcp.json
+entities.json
+mempalace.yaml
+
+# Shell dotfiles (WSL artifacts)
+.bash_profile
+.bashrc
+.profile
+.zprofile
+.zshrc
+.gitconfig
+.ripgreprc
+.gitmodules
