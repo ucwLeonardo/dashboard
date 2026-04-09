@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-09T09:16:10.451Z",
+  "timestamp": "2026-04-09T09:34:24.853Z",
   "current": {
     "hq": {
       "sections": [
@@ -1622,16 +1622,6 @@
         }
       ],
       "total": 83
-    },
-    "event": {
-      "hq": {
-        "sections": [],
-        "total": 0
-      },
-      "china": {
-        "sections": [],
-        "total": 0
-      }
     }
   },
   "changesHistory": []
