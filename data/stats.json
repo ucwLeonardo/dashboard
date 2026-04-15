@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-14T22:44:39.669Z",
+  "timestamp": "2026-04-15T22:40:58.018Z",
   "current": {
     "hq": {
       "sections": [
@@ -1415,7 +1415,7 @@
         },
         {
           "title": "数据科学",
-          "count": 13,
+          "count": 12,
           "courses": [
             {
               "title": "多模态数据管理入门",
@@ -1423,7 +1423,7 @@
               "price": "免费"
             },
             {
-              "title": "在数字生物学中加速数据科学并利用基础模型",
+              "title": "加速数据科学并在数字生物学领域充分利用基础模型",
               "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-HX-05+V1",
               "price": "Free"
             },
@@ -1445,11 +1445,6 @@
             {
               "title": "零代码修改加速数据科学工作流",
               "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+T-DS-03+V1",
-              "price": "Free"
-            },
-            {
-              "title": "加速数据科学并在数字生物学领域充分利用基础模型",
-              "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-HX-05+V1",
               "price": "Free"
             },
             {
@@ -1626,7 +1621,7 @@
           ]
         }
       ],
-      "total": 84
+      "total": 83
     }
   },
   "changesHistory": []
