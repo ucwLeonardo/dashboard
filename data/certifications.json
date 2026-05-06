@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-05-05T22:55:01.959Z",
+  "timestamp": "2026-05-06T22:53:13.923Z",
   "current": {
     "sections": [
       {
@@ -256,27 +256,5 @@
     ],
     "total": 11
   },
-  "changesHistory": [
-    {
-      "timestamp": "2026-04-28T22:57:29.143Z",
-      "diff": {
-        "added": [],
-        "removed": [],
-        "changed": [
-          {
-            "cert": {
-              "title": "AI Operations",
-              "level": "Professional",
-              "description": "Demonstrate the skills needed to monitor, troubleshoot, and optimize NVIDIA AI infrastructure.",
-              "price": "$500",
-              "duration": "2 hours",
-              "code": "NCP-AIO",
-              "url": "https://www.nvidia.com/en-us/learn/certification/ai-operations-professional/"
-            },
-            "changes": "价格: $400 → $500"
-          }
-        ]
-      }
-    }
-  ]
+  "changesHistory": []
 }
