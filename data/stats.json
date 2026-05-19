@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-05-18T23:00:56.318Z",
+  "timestamp": "2026-05-19T23:02:20.757Z",
   "current": {
     "hq": {
       "sections": [
@@ -668,7 +668,7 @@
           ]
         },
         {
-          "title": "图形与仿真",
+          "title": "仿真和物理 AI",
           "count": 27,
           "courses": [
             {
