@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-05-25T23:00:50.413Z",
+  "timestamp": "2026-05-26T23:09:42.268Z",
   "current": {
     "hq": {
       "sections": [
@@ -102,13 +102,8 @@
         },
         {
           "title": "Deep Learning",
-          "count": 15,
+          "count": 14,
           "courses": [
-            {
-              "title": "Integrating Sensors with NVIDIA DRIVE®",
-              "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-AV-06+V1",
-              "price": "$30"
-            },
             {
               "title": "Disaster Risk Monitoring Using Satellite Imagery",
               "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-ES-01+V1",
@@ -359,7 +354,7 @@
           ]
         }
       ],
-      "total": 65
+      "total": 64
     },
     "china": {
       "sections": [
@@ -1624,5 +1619,23 @@
       "total": 83
     }
   },
-  "changesHistory": []
+  "changesHistory": [
+    {
+      "timestamp": "2026-05-26T23:09:42.268Z",
+      "hq": {
+        "added": [],
+        "removed": [
+          {
+            "title": "Integrating Sensors with NVIDIA DRIVE®",
+            "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-AV-06+V1",
+            "price": "$30"
+          }
+        ]
+      },
+      "china": {
+        "added": [],
+        "removed": []
+      }
+    }
+  ]
 }
