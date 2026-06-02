@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-06-01T23:27:07.447Z",
+  "timestamp": "2026-06-02T23:45:53.290Z",
   "current": {
     "hq": {
       "sections": [
@@ -1614,23 +1614,5 @@
       "total": 83
     }
   },
-  "changesHistory": [
-    {
-      "timestamp": "2026-05-26T23:09:42.268Z",
-      "hq": {
-        "added": [],
-        "removed": [
-          {
-            "title": "Integrating Sensors with NVIDIA DRIVE®",
-            "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-AV-06+V1",
-            "price": "$30"
-          }
-        ]
-      },
-      "china": {
-        "added": [],
-        "removed": []
-      }
-    }
-  ]
+  "changesHistory": []
 }
