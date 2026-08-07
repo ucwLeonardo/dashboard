@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-08-05T22:56:42.554Z",
+  "timestamp": "2026-08-07T01:29:50.176Z",
   "current": {
     "sections": [
       {
@@ -274,24 +274,5 @@
     ],
     "total": 12
   },
-  "changesHistory": [
-    {
-      "timestamp": "2026-07-29T22:58:30.071Z",
-      "diff": {
-        "added": [
-          {
-            "title": "AI Rack and Interconnect",
-            "level": "Professional",
-            "description": "Verify the ability to deploy, configure, and validate advanced NVIDIA AI infrastructure.",
-            "price": "$400",
-            "duration": "2 hours",
-            "code": "NCP-ARI",
-            "url": "https://www.nvidia.com/en-us/learn/certification/ai-rack-and-interconnect-professional/"
-          }
-        ],
-        "removed": [],
-        "changed": []
-      }
-    }
-  ]
+  "changesHistory": []
 }
