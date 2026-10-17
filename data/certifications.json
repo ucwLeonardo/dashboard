@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-17T00:09:29.036Z",
+  "timestamp": "2026-10-17T23:45:02.275Z",
   "current": {
     "sections": [
       {
@@ -234,7 +234,7 @@
       },
       {
         "title": "Generative AI",
-        "count": 4,
+        "count": 5,
         "certifications": [
           {
             "title": "Generative AI LLMs",
@@ -271,12 +271,21 @@
             "duration": "1 hour",
             "code": "NCA-GENM",
             "url": "https://www.nvidia.com/en-us/learn/certification/generative-ai-multimodal-associate/"
+          },
+          {
+            "title": "AI Models and Application Development",
+            "level": "Associate",
+            "description": "Validates foundational skills in building, customizing, deploying, and evaluating AI models and applications on NVIDIA’s platform, including retrieval pipelines, inference optimization, and agentic systems.",
+            "price": "$125",
+            "duration": "1 hour",
+            "code": "NCA-AMAD",
+            "url": "https://www.nvidia.com/en-us/learn/certification/ai-model-application-development-associate/"
           }
         ]
       },
       {
         "title": "Simulation and Physical AI",
-        "count": 1,
+        "count": 2,
         "certifications": [
           {
             "title": "OpenUSD Development",
@@ -286,11 +295,20 @@
             "duration": "2 hours",
             "code": "NCP-OUSD",
             "url": "https://www.nvidia.com/en-us/learn/certification/openusd-development-professional/"
+          },
+          {
+            "title": "AI Models and Application Development",
+            "level": "Associate",
+            "description": "Validates foundational skills in building, customizing, deploying, and evaluating AI models and applications on NVIDIA’s platform, including retrieval pipelines, inference optimization, and agentic systems.",
+            "price": "$125",
+            "duration": "1 hour",
+            "code": "NCA-AMAD",
+            "url": "https://www.nvidia.com/en-us/learn/certification/ai-model-application-development-associate/"
           }
         ]
       }
     ],
-    "total": 12
+    "total": 14
   },
   "changesHistory": [
     {
