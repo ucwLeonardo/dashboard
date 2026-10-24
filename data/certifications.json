@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-23T00:23:29.387Z",
+  "timestamp": "2026-10-24T00:15:09.987Z",
   "current": {
     "sections": [
       {
@@ -310,33 +310,5 @@
     ],
     "total": 14
   },
-  "changesHistory": [
-    {
-      "timestamp": "2026-10-17T00:09:29.036Z",
-      "diff": {
-        "added": [
-          {
-            "title": "AI Models and Application Development",
-            "level": "Associate",
-            "description": "Validates foundational skills in building, customizing, deploying, and evaluating AI models and applications on NVIDIA’s platform, including retrieval pipelines, inference optimization, and agentic systems.",
-            "price": "$125",
-            "duration": "1 hour",
-            "code": "NCA-AMAD",
-            "url": "https://www.nvidia.com/en-us/learn/certification/ai-model-application-development-associate/"
-          },
-          {
-            "title": "AI Models and Application Development",
-            "level": "Associate",
-            "description": "Validates foundational skills in building, customizing, deploying, and evaluating AI models and applications on NVIDIA’s platform, including retrieval pipelines, inference optimization, and agentic systems.",
-            "price": "$125",
-            "duration": "1 hour",
-            "code": "NCA-AMAD",
-            "url": "https://www.nvidia.com/en-us/learn/certification/ai-model-application-development-associate/"
-          }
-        ],
-        "removed": [],
-        "changed": []
-      }
-    }
-  ]
+  "changesHistory": []
 }
