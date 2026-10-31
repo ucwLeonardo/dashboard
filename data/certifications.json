@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-30T01:32:29.892Z",
+  "timestamp": "2026-10-31T01:25:26.102Z",
   "current": {
     "sections": [
       {
@@ -36,7 +36,7 @@
           {
             "title": "AI Rack and Interconnect",
             "level": "Professional",
-            "description": "Verify the ability to deploy, configure, and validate advanced NVIDIA AI infrastructure.",
+            "description": "Validate the skills to safely install, cable, and connect NVIDIA AI infrastructure.",
             "price": "$400",
             "duration": "2 hours",
             "code": "NCP-ARI",
@@ -310,5 +310,27 @@
     ],
     "total": 14
   },
-  "changesHistory": []
+  "changesHistory": [
+    {
+      "timestamp": "2026-10-31T01:25:26.101Z",
+      "diff": {
+        "added": [],
+        "removed": [],
+        "changed": [
+          {
+            "cert": {
+              "title": "AI Rack and Interconnect",
+              "level": "Professional",
+              "description": "Validate the skills to safely install, cable, and connect NVIDIA AI infrastructure.",
+              "price": "$400",
+              "duration": "2 hours",
+              "code": "NCP-ARI",
+              "url": "https://www.nvidia.com/en-us/learn/certification/ai-rack-and-interconnect-professional/"
+            },
+            "changes": "描述已更新"
+          }
+        ]
+      }
+    }
+  ]
 }
