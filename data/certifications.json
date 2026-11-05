@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-11-04T01:53:34.564Z",
+  "timestamp": "2026-11-05T01:59:44.298Z",
   "current": {
     "sections": [
       {
@@ -183,7 +183,7 @@
             "title": "AI Networking",
             "level": "Professional",
             "description": "Showcase the ability to deploy and configure environments that leverage NVIDIA’s advanced networking technologies.",
-            "price": "$400",
+            "price": "$500",
             "duration": "2 hours",
             "code": "NCP-AIN",
             "url": "https://www.nvidia.com/en-us/learn/certification/ai-networking-professional/"
