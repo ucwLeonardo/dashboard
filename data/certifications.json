@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-11-06T01:59:37.144Z",
+  "timestamp": "2026-11-07T01:35:45.318Z",
   "current": {
     "sections": [
       {
@@ -311,27 +311,6 @@
     "total": 14
   },
   "changesHistory": [
-    {
-      "timestamp": "2026-10-31T01:25:26.101Z",
-      "diff": {
-        "added": [],
-        "removed": [],
-        "changed": [
-          {
-            "cert": {
-              "title": "AI Rack and Interconnect",
-              "level": "Professional",
-              "description": "Validate the skills to safely install, cable, and connect NVIDIA AI infrastructure.",
-              "price": "$400",
-              "duration": "2 hours",
-              "code": "NCP-ARI",
-              "url": "https://www.nvidia.com/en-us/learn/certification/ai-rack-and-interconnect-professional/"
-            },
-            "changes": "描述已更新"
-          }
-        ]
-      }
-    },
     {
       "timestamp": "2026-11-04T01:53:34.564Z",
       "diff": {
